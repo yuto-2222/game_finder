@@ -1,0 +1,21 @@
+<header>
+  <%= link_to 'GAME FINDER', root_path %>
+  <% if user_signed_in? %>
+    <li>
+      <%= link_to "マイページ", user_path(current_user) %>
+    </li>
+    <li>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    </li>
+  <% else %>
+    <li>
+      <%= link_to "About", about_path %>
+    </li>
+    <li>
+      <%= link_to "サインアップ", new_user_registration_path %>
+    </li>
+    <li>
+      <%= link_to "ログイン", new_user_session_path %>
+    </li>
+  <% end %>
+</header>
