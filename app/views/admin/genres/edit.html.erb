@@ -1,0 +1,13 @@
+<h2>ジャンル編集</h2>
+
+<%= render 'layouts/errors', obj: @genre %>
+    
+<%= form_with model: @genre, url: admin_genre_path, local:true do |f| %>
+  <div class="form-group d-flex justify-content-between text-nowrap mt-3 mb-3">
+    <%= f.label :ジャンル名, class: "font-weight-bold mr-5" %>
+    <%= f.text_field :name, placeholder: "ジャンル名を入力", class: "form-control name mr-5 ml-5" %>
+    <%= f.submit :変更を保存, class: 'btn btn-success ml-5' %>
+  </div>
+<% end %>
+
+<%= link_to '戻る', genres_path %>
