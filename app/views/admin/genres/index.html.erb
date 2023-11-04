@@ -13,7 +13,6 @@
 <% @genres.each do |genre| %>
   <div>
     <%= genre.name %></br>
-    <%= link_to '編集', edit_genre_path(genre) %></br>
-    <%= link_to '削除', genre, method: :delete %>
+    <%= link_to '編集', edit_admin_genre_path(genre) %>
   </div>
 <% end %>

@@ -1,63 +1,46 @@
 class Admin::GenresController < ApplicationController
   # before_action :authenticate_admin!
-  before_action :set_genre, only: %i[ edit update destroy ]
+  before_action :set_genre, only: %i[ edit update ]
 
-  # GET /genres or /genres.json
   def index
     @genres = Genre.all
     @genre = Genre.new
   end
 
-  # GET /genres/1/edit
   def edit
   end
 
-  # POST /genres or /genres.json
   def create
     @genre = Genre.new(genre_params)
-
-    respond_to do |format|
-      if @genre.save
-        format.html { redirect_to genre_url(@genre), notice: "Genre was successfully created." }
-        format.json { render :show, status: :created, location: @genre }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @genre.errors, status: :unprocessable_entity }
-      end
+    if @genre.save
+      flash[:success] = "新しいジャンルが追加されました！"
+      redirect_to admin_genres_path
+    else
+      flash.now[:danger] = "ジャンルを追加することができませんでした。"
+      @genres = Genre.all
+      render 'index'
     end
   end
 
-  # PATCH/PUT /genres/1 or /genres/1.json
   def update
-    respond_to do |format|
-      if @genre.update(genre_params)
-        format.html { redirect_to genre_url(@genre), notice: "Genre was successfully updated." }
-        format.json { render :show, status: :ok, location: @genre }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @genre.errors, status: :unprocessable_entity }
-      end
+    @genre = Genre.find(params[:id])
+    if @genre.update(genre_params)
+      flash[:success] = "ジャンル名がアップデートされました！"
+      redirect_to admin_genres_path
+    else
+      flash.now[:danger] = "ジャンル名の編集ができませんでした。"
+      render 'edit'
     end
   end
 
-  # DELETE /genres/1 or /genres/1.json
-  def destroy
-    @genre.destroy
-
-    respond_to do |format|
-      format.html { redirect_to genres_url, notice: "Genre was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_genre
-      @genre = Genre.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def genre_params
-      params.require(:genre).permit(:name)
-    end
+  def set_genre
+    @genre = Genre.find(params[:id])
+  end
+
+  def genre_params
+    params.require(:genre).permit(:name)
+  end
 end

@@ -14,37 +14,37 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @game = Game.new
+    @genres = Genre.all
   end
 
   # GET /games/1/edit
   def edit
+    @genres = Genre.all
   end
 
   # POST /games or /games.json
   def create
     @game = Game.new(game_params)
 
-    respond_to do |format|
-      if @game.save
-        format.html { redirect_to game_url(@game), notice: "Game was successfully created." }
-        format.json { render :show, status: :created, location: @game }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
+    if @game.save
+      flash[:success] = "新しいゲームが追加されました！"
+      redirect_to games_path
+    else
+      flash.now[:danger] = "ゲームの追加に失敗しました。"
+      @genres = Genre.all
+      render 'new'
     end
   end
 
   # PATCH/PUT /games/1 or /games/1.json
   def update
-    respond_to do |format|
-      if @game.update(game_params)
-        format.html { redirect_to game_url(@game), notice: "Game was successfully updated." }
-        format.json { render :show, status: :ok, location: @game }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
+    if @game.update(game_params)
+      flash[:success] = "ゲーム詳細がアップデートされました！"
+      redirect_to game_path(@game)
+    else
+      flash.now[:danger] = "ゲーム内容の編集ができませんでした。"
+      @genres = Genre.all
+      render 'edit'
     end
   end
 
