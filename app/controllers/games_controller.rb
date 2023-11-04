@@ -4,11 +4,7 @@ class GamesController < ApplicationController
   # GET /games or /games.json
   def index
     @games = Game.all
-  end
-
-  # GET /games/1 or /games/1.json
-  def show
-    @game = Game.find(params[:id])
+    @rating = '評価'
   end
 
   # GET /games/new
@@ -40,7 +36,7 @@ class GamesController < ApplicationController
   def update
     if @game.update(game_params)
       flash[:success] = "ゲーム詳細がアップデートされました！"
-      redirect_to game_path(@game)
+      redirect_to game_reviews_path(@game)
     else
       flash.now[:danger] = "ゲーム内容の編集ができませんでした。"
       @genres = Genre.all
@@ -66,6 +62,6 @@ class GamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def game_params
-      params.require(:game).permit(:genre_id, :name, :release_date)
+      params.require(:game).permit(:name, :release_date, :genre_id)
     end
 end

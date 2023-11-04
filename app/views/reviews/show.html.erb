@@ -2,13 +2,16 @@
 
 <p>
   <strong>User:</strong>
-  <%= @review.user_id %>
+  <%= @review.user.name %>
 </p>
 
 <p>
   <strong>Game:</strong>
-  <%= @review.game_id %>
+  <%= @review.content %>
 </p>
 
 <%= link_to 'Edit', edit_review_path(@review) %> |
+<%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', reviews_path %>
+
+<%#= render partial: "reviews/show_rate", locals: { game: @game } %>

@@ -20,8 +20,12 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show, :edit, :update]
-  resources :games
-  resources :reviews
+  resources :games, except: [:show] do
+    member do
+      get :create
+    end
+    resources :reviews
+  end
   resources :comments
 
 end

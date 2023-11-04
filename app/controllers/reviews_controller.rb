@@ -3,7 +3,10 @@ class ReviewsController < ApplicationController
 
   # GET /reviews or /reviews.json
   def index
-    @reviews = Review.all
+    game_id = params[:game_id]
+    @game = Game.find(game_id)
+    @reviews = @game.reviews
+
   end
 
   # GET /reviews/1 or /reviews/1.json
@@ -22,28 +25,23 @@ class ReviewsController < ApplicationController
   # POST /reviews or /reviews.json
   def create
     @review = Review.new(review_params)
-
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to review_url(@review), notice: "Review was successfully created." }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+    if @review.save
+      flash[:success] = "新しいレビューが追加されました！"
+      redirect_to game_path(game_params)
+    else
+      flash.now[:danger] = "レビューの追加に失敗しました。"
+      render 'new'
     end
   end
 
   # PATCH/PUT /reviews/1 or /reviews/1.json
   def update
-    respond_to do |format|
-      if @review.update(review_params)
-        format.html { redirect_to review_url(@review), notice: "Review was successfully updated." }
-        format.json { render :show, status: :ok, location: @review }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+    if @review.update(review_params)
+      format.html { redirect_to review_url(@review), notice: "Review was successfully updated." }
+      format.json { render :show, status: :ok, location: @review }
+    else
+      format.html { render :edit, status: :unprocessable_entity }
+      format.json { render json: @review.errors, status: :unprocessable_entity }
     end
   end
 
@@ -65,6 +63,6 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.require(:review).permit(:user_id, :game_id)
+      params.require(:review).permit(:content, :rating)
     end
 end

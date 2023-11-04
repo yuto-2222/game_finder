@@ -1,29 +1,5 @@
-<p id="notice"><%= notice %></p>
+<%= render 'games/info', game: @game %>
 
-<h1>Reviews</h1>
+<%= link_to 'レビューを書く', new_game_review_path %>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Game</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @reviews.each do |review| %>
-      <tr>
-        <td><%= review.user_id %></td>
-        <td><%= review.game_id %></td>
-        <td><%= link_to 'Show', review %></td>
-        <td><%= link_to 'Edit', edit_review_path(review) %></td>
-        <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Review', new_review_path %>
+<%= render 'reviews/index', reviews: @reviews %>

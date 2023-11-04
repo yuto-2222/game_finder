@@ -80,11 +80,14 @@ ActiveRecord::Schema.define(version: 2023_11_03_092425) do
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.text "content", null: false
+    t.float "rating", default: 0.0, null: false
     t.integer "user_id", null: false
     t.integer "game_id", null: false
-    t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_reviews_on_game_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -104,4 +107,6 @@ ActiveRecord::Schema.define(version: 2023_11_03_092425) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "reviews", "games"
+  add_foreign_key "reviews", "users"
 end
