@@ -24,8 +24,13 @@ Rails.application.routes.draw do
     member do
       get :create
     end
-    resources :reviews
+    resources :reviews, except: [:edit, :update] do
+      resources :comments, only: [:create] do
+        member do
+          get :destroy
+        end
+      end
+    end
   end
-  resources :comments
 
 end

@@ -1,17 +1,18 @@
-<p id="notice"><%= notice %></p>
+<%= render 'games/info', game: @game %>
 
+<%= link_to 'レビュー一覧に戻る', game_reviews_path(@review) %>
 <p>
-  <strong>User:</strong>
-  <%= @review.user.name %>
+  <strong>ニックネーム:</strong>
+  <%= @review.user.nickname %>
 </p>
 
 <p>
-  <strong>Game:</strong>
+  <strong>レビュー:</strong>
   <%= @review.content %>
 </p>
-
-<%= link_to 'Edit', edit_review_path(@review) %> |
-<%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back', reviews_path %>
-
+<%#= link_to 'Edit', edit_review_path(@review) %>
+<%#= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%#= render partial: "reviews/show_rate", locals: { game: @game } %>
+
+<%= render 'comments/index', comments: @comments %>
+<%= render 'comments/form', game: @game, review: @review, comment: @comment %>

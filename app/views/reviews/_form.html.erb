@@ -1,7 +1,6 @@
-<%= form_with url: game_reviews_path, method: :POST do |f| %>
+<%= form_with model: review, url: game_reviews_path(game) do |f| %>
   <div class="field">
-    <%= f.label :content, 'レビュー内容' %>
-    <%= f.text_field :content %>
+    <%= f.text_area :content, rows: '5', placeholder: 'レビュー記入欄' %>
   </div>
 
   <!--評価の記述-->

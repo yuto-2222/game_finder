@@ -1,0 +1,10 @@
+<% comments.each do |comment| %>
+	<div>
+	  <!--<p><%#= image_tag post_comment.user.get_profile_image(100,100) %></p>-->
+	  <%= comment.user.nickname %>
+	  <%= comment.content %>
+	  <% if comment.user == current_user %>
+      <%= link_to "削除", game_review_comment_path(comment.review.game, comment.review, comment), method: :delete %>
+    <% end %>
+	</div>
+<% end %>

@@ -11,39 +11,33 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1 or /reviews/1.json
   def show
+    @game = Game.find(params[:game_id])
+    @comment = Comment.new
+    @comments = @review.comments
   end
 
   # GET /reviews/new
   def new
+    game_id = params[:game_id]
+    @game = Game.find(game_id)
     @review = Review.new
-  end
-
-  # GET /reviews/1/edit
-  def edit
   end
 
   # POST /reviews or /reviews.json
   def create
+    @game = Game.find(params[:game_id])
     @review = Review.new(review_params)
+    @review.game_id = @game.id
+    @review.user_id = current_user.id
     if @review.save
       flash[:success] = "新しいレビューが追加されました！"
-      redirect_to game_path(game_params)
+      redirect_to game_reviews_path(@game)
     else
       flash.now[:danger] = "レビューの追加に失敗しました。"
       render 'new'
     end
   end
 
-  # PATCH/PUT /reviews/1 or /reviews/1.json
-  def update
-    if @review.update(review_params)
-      format.html { redirect_to review_url(@review), notice: "Review was successfully updated." }
-      format.json { render :show, status: :ok, location: @review }
-    else
-      format.html { render :edit, status: :unprocessable_entity }
-      format.json { render json: @review.errors, status: :unprocessable_entity }
-    end
-  end
 
   # DELETE /reviews/1 or /reviews/1.json
   def destroy

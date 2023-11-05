@@ -1,7 +1,9 @@
+<%= render 'games/info', game: @game %>
+
 <h1>レビュー作成</h1>
 
-<%= render 'reviews/form' %>
+<%= render 'reviews/form', review: @review, game: @game %>
 
 <%#<%= render "reviews/static_rate", review: @review %>
 
-<%= link_to '戻る', games_path %>
+<%= link_to '戻る', game_reviews_path(@game) %>

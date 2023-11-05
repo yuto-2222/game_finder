@@ -1,19 +1,22 @@
 <h2>レビュー一覧</h2>
 
 <% reviews.each do |review| %>
-  <!--user.image-->
-  <%= review.user.name %>
-  <%= link_to review.content, review %>
+  <div>
+    <!--user.image-->
+    <%= review.user.nickname %>
+    <%= review.content %>
+    コメント数:<%= review.comments.count %>
+    <%= link_to 'コメントを書く', game_review_path(@game, review) %>
 
-  <%# 平均点を算出し、round関数で切り上げ %>
-  <!--<%#=@rating %>：<%#= review.average(:rating).to_f.round(1) %>-->
-  <%# 評価数を星に置き換える %>
-  <!-- <div class="average-review-rating" data-score=<%#= review.average(:rating) %>></div>-->
+    <%# 平均点を算出し、round関数で切り上げ %>
+    <!--<%#=@rating %>：<%#= review.average(:rating).to_f.round(1) %>-->
+    <%# 評価数を星に置き換える %>
+    <!-- <div class="average-review-rating" data-score=<%#= review.average(:rating) %>></div>-->
 
-  <!--<th class="table__col1">評価</th>-->
-  <!-- <td class="table__col1">  <div class="field" id="star"><%# f.label :rating %></div></td>-->
-  <!--</tr>-->
+    <!--<th class="table__col1">評価</th>-->
+    <!-- <td class="table__col1">  <div class="field" id="star"><%# f.label :rating %></div></td>-->
+    <!--</tr>-->
 
-  <!--<%#= render partial: "reviews/static_rate", locals: { review: review } %>-->
-
+    <!--<%#= render partial: "reviews/static_rate", locals: { review: review } %>-->
+  </div>
 <% end %>
