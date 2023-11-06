@@ -1,18 +1,47 @@
-<%= form_with model:@user do |f| %>
-  <%= render 'layouts/errors', obj: @user %>
-  <div class="form-group">
-    <%= f.label :nickname, 'ニックネーム' %>
-    <%= f.text_field :nickname %>
-  </div>
-  <div class="form-group">
-    <%= f.label :image, 'イメージ' %>
-    <%= f.file_field :profile_image, accept: 'image/*' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :introduction, 'イントロダクション' %>
-    <%= f.text_area :introduction %>
-  </div>
-  <div class="form-group">
-    <%= f.submit 'アップデート', class: 'btn btn-secondary' %>
-  </div>
+<% if @user == current_user %>
+  <%= form_with model: @user do |f| %>
+    <%= render 'layouts/errors', obj: @user %>
+    <div class="form-group">
+      <%= f.label :nickname, 'ニックネーム' %>
+      <%= f.text_field :nickname %>
+    </div>
+    <!--<div class="form-group">-->
+    <!--  <%#= f.label :image, 'イメージ' %>-->
+    <!--  <%#= f.file_field :profile_image, accept: 'image/*' %>-->
+    <!--</div>-->
+    <div class="form-group">
+      <%= f.label :introduction, 'イントロダクション' %>
+      <%= f.text_area :introduction %>
+    </div>
+    <div class="form-group">
+      <%= f.submit 'アップデート', class: 'btn btn-secondary' %>
+    </div>
+  <% end %>
+
+<% elsif admin_signed_in? %>
+  <%= form_with model:@user do |f| %>
+    <div>ニックネーム</div>
+    <div>
+      <%= @user.nickname %>
+    </div>
+    <!--<div>-->
+      <%#= @user.image %>
+    <!--</div>-->
+    <div>イントロダクション</div>
+    <div>
+      <%= @user.introduction %>
+    </div>
+    <div>
+      <%= f.label :is_active, "会員ステータス" %>
+      <div class="form-inline ">
+        <%= f.radio_button :is_active, :true, checked: @user.is_active, class:"form-control" %>
+        <%= label_tag 'is_active_true', '有効', class:"mr-5" %>
+        <%= f.radio_button :is_active, :false, checked: !@user.is_active, class:"ml-5 form-control" %>
+        <%= label_tag 'is_active_false', '退会' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.submit 'アップデート', class: 'btn btn-secondary' %>
+    </div>
+  <% end %>
 <% end %>

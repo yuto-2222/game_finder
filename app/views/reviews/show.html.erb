@@ -3,7 +3,7 @@
 <%= link_to 'レビュー一覧に戻る', game_reviews_path(@review) %>
 <p>
   <strong>ニックネーム:</strong>
-  <%= @review.user.nickname %>
+  <%= link_to @review.user.nickname, user_path(@review.user.id) %>
 </p>
 
 <p>
@@ -15,4 +15,7 @@
 <%#= render partial: "reviews/show_rate", locals: { game: @game } %>
 
 <%= render 'comments/index', comments: @comments %>
-<%= render 'comments/form', game: @game, review: @review, comment: @comment %>
+
+<% if user_signed_in? %>
+  <%= render 'comments/form', game: @game, review: @review, comment: @comment %>
+<% end %>

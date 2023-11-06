@@ -1,3 +1,8 @@
-<%= user.nickname %>
-<%= user.introduction %>
-<%= link_to '編集', edit_user_path(params[:id]) %>
+<% if user.is_active == false %>
+	<div>退会済みユーザー</div>
+<% end %>
+<div><%= user.nickname %></div>
+<div><%= user.introduction %></div>
+<% if user == current_user or admin_signed_in? %>
+	<div><%= link_to '編集', edit_user_path(params[:id]) %></div>
+<% end %>

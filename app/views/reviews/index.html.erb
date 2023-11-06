@@ -1,5 +1,7 @@
 <%= render 'games/info', game: @game %>
 
-<%= link_to 'レビューを書く', new_game_review_path %>
+<% if user_signed_in? %>
+	<%= link_to 'レビューを書く', new_game_review_path %>
+<% end %>
 
 <%= render 'reviews/index', reviews: @reviews %>
