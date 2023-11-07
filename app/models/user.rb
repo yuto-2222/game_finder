@@ -13,4 +13,12 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  def self.guest
+    find_or_create_by!(email: 'guest@guest.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.nickname = 'ゲスト'
+      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
+    end
+  end
+
 end

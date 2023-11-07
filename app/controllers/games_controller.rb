@@ -5,6 +5,7 @@ class GamesController < ApplicationController
   def index
     @games = Game.all
     @rating = '評価'
+    @genres = Genre.all
   end
 
   # GET /games/new

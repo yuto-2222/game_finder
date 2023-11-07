@@ -1,0 +1,23 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-3 mt-5'>
+			<div>
+				<%= render 'layouts/genre', genres: @genres %>
+			</div>
+		</div>
+
+    <div class='col-9 mt-5'>
+    	<div class="my-3">
+    		<span class="h2"><%= @genre.name %>一覧</span> <span>(全<%= @games.count %>件)</span>
+    	</div>
+    	<%= render 'games/index', games: @games %>
+
+    <!--  <div class="d-flex justify-content-center">-->
+  		<!--	<p>-->
+    <!--			<%#= paginate @games, theme: 'bootstrap-5' %>-->
+	  	<!--	</p>-->
+ 			<!--</div>-->
+
+		</div>
+	</div>
+</div>

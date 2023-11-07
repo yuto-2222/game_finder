@@ -36,4 +36,11 @@
       <%= link_to "ログイン", new_user_session_path %>
     </li>
   <% end %>
+
+  <div class="mt-3 text-right">
+    <%= form_with url: search_path, method: :get, local: true do |f| %>
+      <%= f.text_field :content, placeholder: "ゲーム名" %>
+      <%= f.submit "検索" %>
+    <% end %>
+  </div>
 </header>

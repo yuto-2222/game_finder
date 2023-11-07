@@ -1,0 +1,37 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-3 mt-5'>
+			<div>
+				<%= render 'layouts/genre', genres: @genres %>
+			</div>
+		</div>
+
+    <div class='col-9 mt-5'>
+      <% if @records.empty? %>
+  			<p class="font-weight-bold d-flex justify-content-center">「<%= params[:content] %>」で検索したゲームは見つかりませんでした。</p>
+			<% else %>
+	    	<div class="my-3">
+	    		<span class="h2">「<%= params[:content] %>」の検索一覧</span> <span>(全<%= @records.count %>件)</span>
+	    	</div>
+    		<div class="container">
+    			<div class="row">
+						<% @records.each do |game| %>
+							<div class="mr-1">
+						    <%= link_to game_path(game) do %>
+						    	<%#= image_tag item.image, size: "200x150" %>
+						    	<div class="ml-2 mt-2 font-weight-bold"><%= game.name %></div>
+					      <% end %></br>
+				    	</div>
+			    	<% end %>
+		      </div>
+	      </div>
+
+     <!-- 	<div class="d-flex justify-content-center">-->
+  			<!--	<p>-->
+    	<!--			<%#= paginate @records, theme: 'bootstrap-5' %>-->
+  			<!--	</p>-->
+ 				<!--</div>-->
+			<% end %>
+		</div>
+	</div>
+</div>

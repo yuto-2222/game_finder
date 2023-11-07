@@ -1,4 +1,8 @@
-<h1>Games</h1>
+<div>
+	<%= render 'layouts/genre', genres: @genres %>
+</div>
+
+<h2>Games</h2>
 
 <div>
   <%= link_to 'New Game', new_game_path %>

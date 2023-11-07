@@ -4,5 +4,7 @@
 <div><%= user.nickname %></div>
 <div><%= user.introduction %></div>
 <% if user == current_user or admin_signed_in? %>
-	<div><%= link_to '編集', edit_user_path(params[:id]) %></div>
+	<% if user.nickname != 'ゲスト' %>
+		<div><%= link_to '編集', edit_user_path(params[:id]) %></div>
+	<% end %>
 <% end %>

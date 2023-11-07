@@ -7,5 +7,10 @@ class Game < ApplicationRecord
   # アソシエーション
   has_many :reviews, dependent: :destroy
   belongs_to :genre
+  
+  def self.search(keyword)
+    where("facility_name LIKE ?", "%#{keyword}%")
+  end
+
 	
 end

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   }
   devise_scope :user do
     get '/users/sign_out' => 'public/sessions#destroy'
+    get '/users/guest_sign_in' => 'public/sessions#guest_sign_in'
   end
 
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
@@ -19,14 +20,18 @@ Rails.application.routes.draw do
 
   root to: 'homes#top'
   get '/about' => 'homes#about'
-
-
+  get '/genre/search' => 'searches#genre_search'
+  get '/search' => 'searches#search'
 
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
   end
 
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      patch :cancel
+    end
+  end
 
   resources :games, except: [:show] do
     # member do
