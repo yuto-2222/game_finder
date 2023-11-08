@@ -1,4 +1,5 @@
 class SearchesController < ApplicationController
+	before_action :user_or_admin?
 
 	def genre_search
 		@genres = Genre.all

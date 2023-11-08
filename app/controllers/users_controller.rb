@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
+  before_action :user_or_admin?
   # before_action :guest_not_edit, only: [:edit]
 
   def show
     @user = User.find(params[:id])
+    @reviews = Review.where(user_id: @user.id).page(params[:page]).per(8)
   end
 
   def edit

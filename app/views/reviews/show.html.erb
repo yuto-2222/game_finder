@@ -2,14 +2,19 @@
 
 <%= link_to 'レビュー一覧に戻る', game_reviews_path(@review) %>
 <p>
-  <strong>ニックネーム:</strong>
+  ニックネーム:
   <%= link_to @review.user.nickname, user_path(@review.user.id) %>
 </p>
 
 <p>
-  <strong>レビュー:</strong>
+  レビュー:
   <%= @review.content %>
 </p>
+
+<% if admin_signed_in? %>
+  <%= button_to 'レビュー削除', game_review_path(@game, @review), method: :delete,
+      data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
+<% end %>
 <%#= link_to 'Edit', edit_review_path(@review) %>
 <%#= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%#= render partial: "reviews/show_rate", locals: { game: @game } %>
@@ -17,5 +22,13 @@
 <%= render 'comments/index', comments: @comments %>
 
 <% if user_signed_in? %>
-  <%= render 'comments/form', game: @game, review: @review, comment: @comment %>
+  <% if current_user.nickname != 'ゲスト' %>
+    <%= render 'comments/form', game: @game, review: @review, comment: @comment %>
+  <% end %>
 <% end %>
+
+<div class="d-flex justify-content-center">
+	<p>
+		<%= paginate @comments, theme: 'bootstrap-5' %>
+	</p>
+</div>

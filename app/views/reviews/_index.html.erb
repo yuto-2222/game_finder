@@ -8,8 +8,14 @@
     コメント数:<%= review.comments.count %>
 
     <% if user_signed_in? %>
-      <%= link_to 'コメントを書く', game_review_path(@game, review) %>
+      <% if current_user.nickname != 'ゲスト' %>
+        <%= link_to 'コメントを書く', game_review_path(@game, review) %>
+      <% else %>
+        <%= link_to 'コメント一覧', game_review_path(@game, review) %>
+      <% end %>
     <% elsif admin_signed_in? %>
+      <%= button_to 'レビュー削除', game_review_path(@game, review), method: :delete,
+          data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
       <%= link_to 'コメント一覧', game_review_path(@game, review) %>
     <% end %>
 

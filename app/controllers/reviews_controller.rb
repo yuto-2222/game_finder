@@ -1,11 +1,12 @@
 class ReviewsController < ApplicationController
+  before_action :user_or_admin?
   before_action :set_review, only: %i[ show edit update destroy ]
 
   # GET /reviews or /reviews.json
   def index
     game_id = params[:game_id]
     @game = Game.find(game_id)
-    @reviews = @game.reviews
+    @reviews = @game.reviews.page(params[:page]).per(8)
 
   end
 
@@ -13,7 +14,7 @@ class ReviewsController < ApplicationController
   def show
     @game = Game.find(params[:game_id])
     @comment = Comment.new
-    @comments = @review.comments
+    @comments = @review.comments.page(params[:page]).per(8)
   end
 
   # GET /reviews/new
@@ -42,11 +43,7 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1 or /reviews/1.json
   def destroy
     @review.destroy
-
-    respond_to do |format|
-      format.html { redirect_to reviews_url, notice: "Review was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to request.referer
   end
 
   private

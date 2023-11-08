@@ -18,7 +18,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
+  def user_or_admin?
+    if user_signed_in? or admin_signed_in?
+    else
+      flash[:danger] = 'ログインが必要です'
+      redirect_to root_path
+    end
+  end
 
 	protected
 

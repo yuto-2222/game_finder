@@ -1,1 +1,13 @@
 <%= render 'info', user: @user %>
+
+<% @reviews.each do |review| %>
+	<div>
+		ゲーム名: <%= link_to review.game.name, game_reviews_path(review.game) %>
+	</div>
+	<div>
+		レビュー内容: <%= link_to review.content, game_review_path(review.game, review) %>
+	</div>
+	<div>
+		コメント数: <%= review.comments.count %>
+	</div>
+<% end %>

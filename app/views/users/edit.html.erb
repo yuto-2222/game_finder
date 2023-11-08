@@ -20,11 +20,11 @@
 
   <div>
     <%= button_to '退会する', cancel_user_path(@user), method: :patch,
-        data: { confirm: '本当に退会しますか？' }, class: "btn btn-danger ml-4 col-12" %>
+        data: { confirm: '本当に退会しますか？' }, class: "btn btn-danger ml-4" %>
   </div>
 
 <% elsif admin_signed_in? %>
-  <%= form_with model:@user do |f| %>
+  <%= form_with model: @user do |f| %>
     <div>ニックネーム</div>
     <div>
       <%= @user.nickname %>

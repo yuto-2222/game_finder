@@ -1,9 +1,10 @@
 class GamesController < ApplicationController
+  before_action :user_or_admin?
   before_action :set_game, only: %i[ show edit update destroy ]
 
   # GET /games or /games.json
   def index
-    @games = Game.all
+    @games = Game.all.page(params[:page]).per(8)
     @rating = '評価'
     @genres = Genre.all
   end
@@ -55,14 +56,22 @@ class GamesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game
-      @game = Game.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def game_params
-      params.require(:game).permit(:name, :release_date, :genre_id)
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game
+    @game = Game.find(params[:id])
+  end
+
+  def user_or_admin?
+    if user_signed_in? or admin_signed_in?
+    else
+      redirect_to root_path, notice: 'ログインが必要です'
     end
+  end
+
+  # Only allow a list of trusted parameters through.
+  def game_params
+    params.require(:game).permit(:name, :release_date, :genre_id)
+  end
 end

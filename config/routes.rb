@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   }
   devise_scope :user do
     get '/users/sign_out' => 'public/sessions#destroy'
-    get '/users/guest_sign_in' => 'public/sessions#guest_sign_in'
+    post '/users/guest_sign_in' => 'public/sessions#guest_sign_in'
   end
 
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {

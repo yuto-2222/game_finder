@@ -5,7 +5,19 @@
 <h2>Games</h2>
 
 <div>
-  <%= link_to 'New Game', new_game_path %>
+	<% if user_signed_in? %>
+		<% if current_user.nickname != 'ゲスト' %>
+			<%= link_to 'New Game', new_game_path %>
+		<% end %>
+	<% elsif admin_signed_in? %>
+		<%= link_to 'New Game', new_game_path %>
+	<% end %>
 </div>
 
 <%= render 'index', games: @games %>
+
+<div class="d-flex justify-content-center">
+	<p>
+		<%= paginate @games, theme: 'bootstrap-5' %>
+	</p>
+</div>

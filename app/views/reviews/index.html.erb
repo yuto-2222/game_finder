@@ -1,7 +1,15 @@
 <%= render 'games/info', game: @game %>
 
 <% if user_signed_in? %>
-	<%= link_to 'レビューを書く', new_game_review_path %>
+	<% if current_user.nickname != 'ゲスト' %>
+		<%= link_to 'レビューを書く', new_game_review_path %>
+	<% end %>
 <% end %>
 
 <%= render 'reviews/index', reviews: @reviews %>
+
+<div class="d-flex justify-content-center">
+	<p>
+		<%= paginate @reviews, theme: 'bootstrap-5' %>
+	</p>
+</div>

@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :user_or_admin?
   before_action :set_comment, only: %i[ update destroy ]
 
   # POST /comments or /comments.json
