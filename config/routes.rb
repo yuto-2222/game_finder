@@ -34,10 +34,9 @@ Rails.application.routes.draw do
   end
 
   resources :games, except: [:show] do
-    # member do
-    #   get :create
-    # end
+    resource :play_games, only: [:create, :destroy]
     resources :reviews, except: [:edit, :update] do
+      resource :usefuls, only: [:create, :destroy]
       resources :comments, only: [:create] do
         member do
           get :destroy

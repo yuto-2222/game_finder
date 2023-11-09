@@ -12,6 +12,8 @@ class User < ApplicationRecord
   # アソシエーション
   has_many :reviews, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :play_games, dependent: :destroy
+  has_many :usefuls, dependent: :destroy
 
   def self.guest
     find_or_create_by!(email: 'guest@guest.com') do |user|

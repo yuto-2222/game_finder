@@ -1,2 +1,18 @@
-<h1>Homes#about</h1>
-<p>Find me in app/views/homes/about.html.erb</p>
+<div>
+	<p class="text-center mt-5 mb-5 h1">About</p>
+	<p class="text-center h5">
+		ゲーム好きが集まるサイトです。</br>
+		プレイしたゲームのレビューをしたり、</br>
+		ゲームを探すことができます。</br>
+		レビューをしたユーザーの過去のゲーム歴や、</br>
+		そのゲームのレビューなども見ることができます。
+	</p>
+</div>
+
+<% if user_signed_in? %>
+<% elsif admin_signed_in? %>
+<% else %>
+	<%= link_to "サインアップ(お試しもできるよ)", new_user_registration_path %> |
+	<%= link_to "ログイン", new_user_session_path %> |
+	<%= link_to '管理者ログイン', admin_session_path %>
+<% end %>

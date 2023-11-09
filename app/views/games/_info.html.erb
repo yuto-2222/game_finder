@@ -1,12 +1,15 @@
-<p>
+<div>
   <%= game.name %>
-</p>
-<p>
+</div>
+<div>
   <%= game.genre.name %>
-</p>
-<p>
+</div>
+<div>
   <%= game.release_date %>
-</p>
+</div>
+<div>
+  <%= render 'play_games/btn', game: game %>
+</div>
 <% if user_signed_in? %>
   <% if current_user.nickname != 'ゲスト' %>
     <%= link_to 'Edit', edit_game_path(game) %>

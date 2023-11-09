@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_03_092425) do
+ActiveRecord::Schema.define(version: 2023_11_09_061807) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -79,6 +79,13 @@ ActiveRecord::Schema.define(version: 2023_11_03_092425) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "play_games", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.text "content", null: false
     t.float "rating", default: 0.0, null: false
@@ -88,6 +95,13 @@ ActiveRecord::Schema.define(version: 2023_11_03_092425) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id"], name: "index_reviews_on_game_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "usefuls", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "review_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

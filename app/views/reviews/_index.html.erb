@@ -5,6 +5,7 @@
     <!--user.image-->
     <%= link_to review.user.nickname, user_path(review.user.id) %>
     <%= review.content %>
+    <%= render 'usefuls/btn', review: review %>
     コメント数:<%= review.comments.count %>
 
     <% if user_signed_in? %>

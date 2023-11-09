@@ -1,15 +1,19 @@
 <%= render 'games/info', game: @game %>
 
-<%= link_to 'レビュー一覧に戻る', game_reviews_path(@review) %>
-<p>
+<%= link_to 'レビュー一覧に戻る', game_reviews_path(@review.game, @review) %>
+<div>
   ニックネーム:
   <%= link_to @review.user.nickname, user_path(@review.user.id) %>
-</p>
+</div>
 
-<p>
+<div>
   レビュー:
   <%= @review.content %>
-</p>
+</div>
+
+<div>
+  <%= render 'usefuls/btn', review: @review %>
+</div>
 
 <% if admin_signed_in? %>
   <%= button_to 'レビュー削除', game_review_path(@game, @review), method: :delete,
