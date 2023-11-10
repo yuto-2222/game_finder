@@ -2,17 +2,20 @@
   <%= form_with model: @user do |f| %>
     <%= render 'layouts/errors', obj: @user %>
     <div class="form-group">
+      <%= f.label :profile_image, 'イメージ(なくてもOK)' %>
+      <%= f.file_field :profile_image, accept: 'image/*' %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :nickname, 'ニックネーム' %>
       <%= f.text_field :nickname %>
     </div>
-    <!--<div class="form-group">-->
-    <!--  <%#= f.label :image, 'イメージ' %>-->
-    <!--  <%#= f.file_field :profile_image, accept: 'image/*' %>-->
-    <!--</div>-->
+
     <div class="form-group">
-      <%= f.label :introduction, 'イントロダクション' %>
+      <%= f.label :introduction, 'イントロダクション(空欄可)' %>
       <%= f.text_area :introduction %>
     </div>
+
     <div class="form-group">
       <%= f.submit 'アップデート', class: 'btn btn-secondary' %>
     </div>
@@ -49,4 +52,6 @@
       <%= f.submit 'アップデート', class: 'btn btn-secondary' %>
     </div>
   <% end %>
+
+<% else %>
 <% end %>

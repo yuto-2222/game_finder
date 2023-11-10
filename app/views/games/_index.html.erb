@@ -1,10 +1,50 @@
-<% games.each do |game| %>
-	<div>
-		<%#= link_to 'image', game_reviews_path(game) %></br>
-  	<%= link_to game.name, game_reviews_path(game) %>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<table class='table table-hover'>
+				<thead class="bg-light">
+					<tr>
+						<th></th>
+						<th>ゲーム名</th>
+						<th>発売日</th>
+						<th>プレイ済み</th>
+						<!--<th>レーティング</th>-->
+						<th>レビュー数</th>
+					</tr>
+				</thead>
 
-  	<!--評価記載-->
-  <!--	<div class="average-review-rating" data-score=<%#= game.reviews.average(:rating) %>></div>-->
-		<!--<%#=@rating %>：<%#= game.reviews.average(:rating).to_f.round(1) %>-->
+				<tbody>
+					<% games.each do |game| %>
+						<tr data-controller="href"
+								data-action="click->href#toHref"
+								data-href="<%= game_reviews_path(game) %>"
+								style="cursor: pointer;">
+
+							<td>
+								<%= image_tag game.get_image, size: "90x100" %>
+							</td>
+							<td class="text-center align-middle text-dark">
+								<%= game.name %>
+							</td>
+							<td class="text-center align-middle text-dark">
+								<%= game.release_date %>
+							</td>
+							<td class="text-center align-middle text-dark">
+								<%= game.play_games.count %>
+							</td>
+							<!--<td class="text-center text-dark">-->
+								<!--評価記載-->
+								<!--	<div class="average-review-rating" data-score=<%#= game.reviews.average(:rating) %>></div>-->
+								<!--<%#=@rating %>：<%#= game.reviews.average(:rating).to_f.round(1) %>-->
+							<!--</td>-->
+							<td class="text-center align-middle text-dark">
+								<%= game.reviews.count %>
+							</td>
+
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
 	</div>
-<% end %>
+</div>

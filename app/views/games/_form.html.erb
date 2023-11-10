@@ -1,4 +1,8 @@
 <%= form_with model: game do |f| %>
+  <div  class="field">
+    <%= f.label :image, 'ゲームイメージ(スルーしてもOK)' %>
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
   <div class="field">
     <%= f.label :name, 'ゲーム名' %>
     <%= f.text_field :name %>
@@ -11,7 +15,7 @@
 
   <div class="field">
     <%= f.label :release_date, '発売日' %>
-    <%= f.date_select :release_date %>
+    <%= raw sprintf(f.date_select(:release_date, start_year: 1975, use_month_numbers: true, date_separator: '%s'), '年', '月')+ '日' %>
   </div>
 
   <div class="actions">

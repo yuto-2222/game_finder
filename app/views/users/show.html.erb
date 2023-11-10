@@ -8,6 +8,9 @@
 		レビュー内容: <%= link_to review.content, game_review_path(review.game, review) %>
 	</div>
 	<div>
+		有用: <%= review.usefuls.count %>
+	</div>
+	<div>
 		コメント数: <%= review.comments.count %>
 	</div>
 <% end %>

@@ -1,38 +1,61 @@
-<h2>サインアップ</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :nickname, 'ニックネーム' %><br />
-    <%= f.text_field :nickname, autofocus: true %>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <p class="font-weight-bold bg-secondary bg-secondary text-light  m-5 p-1 h4">
+      サインアップ
+    </p>
   </div>
-
-  <div class="field">
-    <%= f.label :email, 'メールアドレス' %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password, 'パスワード' %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> 文字以上)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, 'パスワード再入力' %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "サインアップ" %>
-  </div>
-<% end %>
-
-<div>
-  <%= link_to 'ゲストでお試し', users_guest_sign_in_path, method: :post %>
 </div>
 
-<%= render "public/shared/links" %>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="d-flex justify-content-center border rounded p-3 shadow">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "public/shared/error_messages", resource: resource %>
+
+        <div class="field my-1">
+          <%= f.label :nickname, 'ニックネーム' %><br />
+          <%= f.text_field :nickname, autofocus: true %>
+        </div>
+
+        <div class="field my-1">
+          <%= f.label :email, 'メールアドレス' %>
+          <%= f.email_field :email, autocomplete: "email", class: "w-100" %>
+        </div>
+
+        <div class="field my-1">
+          <%= f.label :password, 'パスワード(半角英数6文字以上)' %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> 文字以上)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+
+        <div class="field my-1">
+          <%= f.label :password_confirmation, 'パスワード再入力' %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+
+        <div class="actions mt-2">
+          <%= f.submit "サインアップ" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <p class="font-weight-bold bg-secondary bg-secondary text-light text-center m-5 p-1 h5">
+      既に登録済みの方 or お試し
+    </p>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <div>
+      <%= link_to 'ログインへ', new_user_session_path, class: "mr-1 btn btn-outline-secondary" %>
+    </div>
+    <div>
+      <%= link_to 'ゲストでお試し', users_guest_sign_in_path, method: :post, class: "ml-1 btn btn-outline-secondary" %>
+    </div>
+  </div>
+</div>

@@ -15,12 +15,22 @@ class User < ApplicationRecord
   has_many :play_games, dependent: :destroy
   has_many :usefuls, dependent: :destroy
 
+  has_one_attached :profile_image
+
   def self.guest
     find_or_create_by!(email: 'guest@guest.com') do |user|
       user.password = SecureRandom.urlsafe_base64
       user.nickname = 'ゲスト'
       # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
     end
+  end
+
+  def get_profile_image
+    unless profile_image.attached?
+      file_path = Rails.root.join('app/assets/images/no_profile_image.jpg')
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+      profile_image
   end
 
 end

@@ -26,7 +26,7 @@ class GamesController < ApplicationController
 
     if @game.save
       flash[:success] = "新しいゲームが追加されました！"
-      redirect_to games_path
+      redirect_to game_path(@game)
     else
       flash.now[:danger] = "ゲームの追加に失敗しました。"
       @genres = Genre.all
@@ -72,6 +72,6 @@ class GamesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.require(:game).permit(:name, :release_date, :genre_id)
+    params.require(:game).permit(:name, :release_date, :genre_id, :image)
   end
 end

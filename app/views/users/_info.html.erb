@@ -1,7 +1,10 @@
 <% if user.is_active == false %>
 	<div>退会済みユーザー</div>
 <% end %>
+<div><%= image_tag user.get_profile_image, size: '100×100' %></div>
+<div>ニックネーム</div>
 <div><%= user.nickname %></div>
+<div>イントロダクション</div>
 <div><%= user.introduction %></div>
 <% if user == current_user or admin_signed_in? %>
 	<% if user.nickname != 'ゲスト' %>

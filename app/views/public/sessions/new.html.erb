@@ -1,27 +1,56 @@
-<h2>ログイン</h2>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <p class="font-weight-bold bg-secondary bg-secondary text-light  m-5 p-1 h4">
+      ログイン
+    </p>
+  </div>
+</div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email, 'メールアドレス' %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="d-flex justify-content-center border rounded p-3 shadow">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field my-1">
+          <%= f.label :email, 'メールアドレス' %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-100" %>
+        </div>
+
+        <div class="field my-1">
+          <%= f.label :password, 'パスワード(半角英数6文字以上)' %><br />
+          <%= f.password_field :password, autocomplete: "current-password" %>
+        </div>
+
+        <!--< if devise_mapping.rememberable? %>-->
+        <!--  <div class="field">-->
+        <!--    <= f.check_box :remember_me %>-->
+        <!--    <= f.label :remember_me %>-->
+        <!--  </div>-->
+        <!--< end %>-->
+
+
+        <div class="actions mt-2">
+          <%= f.submit "ログイン" %>
+        </div>
+        <div class="mt-2">
+          <%= link_to "パスワードをお忘れですか?", new_password_path(resource_name) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <p class="font-weight-bold bg-secondary bg-secondary text-light text-center m-5 p-1 h5">
+      まだ登録していない or お試し
+    </p>
   </div>
 
-  <div class="field">
-    <%= f.label :password, 'パスワード' %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <div class="d-flex justify-content-center">
+    <div>
+      <%= link_to "サインアップへ", new_user_registration_path, class: "mr-1 btn btn-outline-secondary" %></br>
+    </div>
+    <div>
+      <%= link_to 'ゲストでお試し', users_guest_sign_in_path, method: :post, class: "ml-1 btn btn-outline-secondary" %>
+    </div>
   </div>
-
-  <!--< if devise_mapping.rememberable? %>-->
-  <!--  <div class="field">-->
-  <!--    <= f.check_box :remember_me %>-->
-  <!--    <= f.label :remember_me %>-->
-  <!--  </div>-->
-  <!--< end %>-->
-
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>
