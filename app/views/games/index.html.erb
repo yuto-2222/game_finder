@@ -8,7 +8,7 @@
 
 		<div class='col-9 mt-5'>
     	<div class="my-3">
-				<span class="h2 mr-2">Games</span>
+				<span class="h2 mr-2">ゲーム一覧</span> <span>(全<%= @games.count %>件)</span>
 				<span class="ml-2">
 					<% if user_signed_in? %>
 						<% if current_user.nickname != 'ゲスト' %>
@@ -18,10 +18,13 @@
 						<%= link_to 'ゲームを追加', new_game_path %>
 					<% end %>
 				</span>
+				<div>
+					<%= link_to '新しい順', games_path(latest: "true") %> |
+					<%= link_to '古い順', games_path(earliest: "true") %> |
+					<%= link_to '人気順', games_path(popular: "true") %>
+				</div>
+				<%= render 'index', games: @games %>
 			</div>
-
-			<%= render 'index', games: @games %>
-
 			<div class="d-flex justify-content-center">
 				<p>
 					<%= paginate @games, theme: 'bootstrap-5' %>

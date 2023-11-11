@@ -11,6 +11,10 @@ class Game < ApplicationRecord
 
   has_one_attached :image
 
+  scope :latest, -> { order(release_date: :desc) }
+  scope :earliest, -> { order(release_date: :asc) }
+  scope :popular, -> { order(played_count: :desc) }
+
   def self.search(keyword)
     where("facility_name LIKE ?", "%#{keyword}%")
   end

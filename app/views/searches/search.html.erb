@@ -7,30 +7,31 @@
 		</div>
 
     <div class='col-9 mt-5'>
-      <% if @records.empty? %>
+      <% if @games.empty? %>
   			<p class="font-weight-bold d-flex justify-content-center">「<%= params[:content] %>」で検索したゲームは見つかりませんでした。</p>
 			<% else %>
 	    	<div class="my-3">
-	    		<span class="h2">「<%= params[:content] %>」の検索一覧</span> <span>(全<%= @records.count %>件)</span>
+	    		<span class="h2 mr-2">「<%= params[:content] %>」の検索一覧</span> <span>(全<%= @games.count %>件)</span>
+	    		<span class="ml-2">
+						<% if user_signed_in? %>
+							<% if current_user.nickname != 'ゲスト' %>
+								<%= link_to 'ゲームを追加', new_game_path %>
+							<% end %>
+						<% elsif admin_signed_in? %>
+							<%= link_to 'ゲームを追加', new_game_path %>
+						<% end %>
+					</span>
 	    	</div>
-    		<div class="container">
-    			<div class="row">
-						<% @records.each do |game| %>
-							<div class="mr-1">
-						    <%= link_to game_path(game) do %>
-						    	<%#= image_tag item.image, size: "200x150" %>
-						    	<div class="ml-2 mt-2 font-weight-bold"><%= game.name %></div>
-					      <% end %></br>
-				    	</div>
-			    	<% end %>
-		      </div>
-	      </div>
+    		<%= link_to '新しい順', search_path(content: params[:content], latest: "true") %> |
+				<%= link_to '古い順', search_path(content: params[:content], earliest: "true") %> |
+				<%= link_to '人気順', search_path(content: params[:content], popular: "true") %>
+    		<%= render 'games/index', games: @games %>
 
-     <!-- 	<div class="d-flex justify-content-center">-->
-  			<!--	<p>-->
-    	<!--			<%#= paginate @records, theme: 'bootstrap-5' %>-->
-  			<!--	</p>-->
- 				<!--</div>-->
+      	<div class="d-flex justify-content-center">
+  				<p>
+    				<%= paginate @games, theme: 'bootstrap-5' %>
+  				</p>
+ 				</div>
 			<% end %>
 		</div>
 	</div>

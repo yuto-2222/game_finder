@@ -4,7 +4,16 @@ class GamesController < ApplicationController
 
   # GET /games or /games.json
   def index
-    @games = Game.all.page(params[:page]).per(8)
+    if params[:latest] == "true"
+      @games = Game.latest.page(params[:page]).per(8)
+    elsif params[:earliest] == "true"
+      @games = Game.earliest.page(params[:page]).per(8)
+    elsif params[:popular] == "true"
+      @games = Game.popular.page(params[:page]).per(8)
+    else
+      @games = Game.all.page(params[:page]).per(8)
+    end
+
     @rating = '評価'
     @genres = Genre.all
   end
@@ -26,7 +35,7 @@ class GamesController < ApplicationController
 
     if @game.save
       flash[:success] = "新しいゲームが追加されました！"
-      redirect_to game_path(@game)
+      redirect_to game_reviews_path(@game)
     else
       flash.now[:danger] = "ゲームの追加に失敗しました。"
       @genres = Genre.all
