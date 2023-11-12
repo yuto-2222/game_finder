@@ -2,10 +2,10 @@
 <%= form_with model: [game, review, comment] do |f| %>
 
   <div class="field">
-    <%= f.text_area :content, rows: '5', placeholder: 'コメント記入欄' %>
+    <%= f.text_area :content, rows: '5', placeholder: 'コメント記入欄', class: 'form-control' %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions text-right">
+    <%= f.submit '保存' %>
   </div>
 <% end %>
