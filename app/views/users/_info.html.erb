@@ -1,13 +1,36 @@
-<% if user.is_active == false %>
-	<div>退会済みユーザー</div>
-<% end %>
-<div><%= image_tag user.get_profile_image, size: '100×100' %></div>
-<div>ニックネーム</div>
-<div><%= user.nickname %></div>
-<div>イントロダクション</div>
-<div><%= user.introduction %></div>
-<% if user == current_user or admin_signed_in? %>
-	<% if user.nickname != 'ゲスト' %>
-		<div><%= link_to '編集', edit_user_path(params[:id]) %></div>
+<table class=" table border border-dark", style="width:80%;">
+  <th class="text-center align-middle border-bottom border-dark">
+    info
+  </th>
+	<% if user.is_active == false %>
+		<tr>
+			<td>退会済みユーザー</td>
+		</tr>
 	<% end %>
-<% end %>
+	<tr>
+		<td class="text-center align-middle">
+			<%= image_tag user.get_profile_image, size: '100×100' %>
+		</td>
+	</tr>
+	<tr>
+		<td class="align-middle">
+			<p>ニックネーム:</p>
+			<div class="text-center"><%= user.nickname %></div>
+		</td>
+	</tr>
+	<tr>
+		<td class="align-middle">
+			<p>イントロダクション:</p>
+			<div class="text-center"><%= user.introduction %></div>
+		</td>
+	</tr>
+	<tr>
+		<td class="text-center align-middle">
+			<% if user == current_user or admin_signed_in? %>
+				<% if user.nickname != 'ゲスト' %>
+					<div><%= link_to '編集', edit_user_path(params[:id]) %></div>
+				<% end %>
+			<% end %>
+		</td>
+	</tr>
+</table>
