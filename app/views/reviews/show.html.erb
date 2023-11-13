@@ -1,0 +1,73 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-3 mt-5'>
+			<div>
+				<%= render 'games/info', game: @game %>
+			</div>
+		</div>
+		<div class='col-9 mt-5'>
+    	<div class="my-3">
+    		<span class="h2 mr-2">コメント一覧</span> <span>(全<%= @review.comments.count %>件)</span>
+				<span class="ml-2">
+					<%= link_to 'レビュー一覧に戻る', game_reviews_path(@review.game, @review) %>
+				</span>
+
+  			<table class='table table-hover'>
+  				<thead class="bg-light">
+  					<tr>
+  						<th></th>
+  						<th>ニックネーム</th>
+  						<th>レビュー</th>
+  						<th>役立った</th>
+  						<!--<th>レーティング</th>-->
+  						<% if admin_signed_in? %>
+  						  <th></th>
+  						<% end %>
+  					</tr>
+  				</thead>
+
+  				<tbody>
+  				  <tr>
+  				    <td>
+  				      <%= image_tag @review.user.get_profile_image, size: "90x90" %>
+  				    </td>
+  				    <td class="text-center align-middle text-dark">
+  				      <%= link_to @review.user.nickname, user_path(@review.user.id) %>
+  				    </td>
+  				    <td class="text-center align-middle text-dark">
+  				      <%= @review.content %>
+  				    </td>
+  				    <td class="text-center align-middle text-dark">
+  				      <%= render 'usefuls/btn', review: @review %>
+  				    </td>
+  				    <!--<td class="text-center align-middle text-dark">-->
+  				    <!--  <%#= render partial: "reviews/show_rate", locals: { game: @game } %>-->
+  				    <!--</td>-->
+  				    <% if admin_signed_in? %>
+  				      <td class="text-center align-middle text-dark">
+                  <%= button_to 'レビュー削除', game_review_path(@game, @review), method: :delete,
+                      data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
+                </td>
+              <% end %>
+  				    </td>
+  				  </tr>
+  				</tbody>
+				</table>
+
+        <%= render 'comments/index', comments: @comments %>
+        
+        <% if user_signed_in? %>
+          <% if current_user.nickname != 'ゲスト' %>
+            <%= render 'comments/form', game: @game, review: @review, comment: @comment %>
+          <% end %>
+        <% end %>
+        
+        <div class="d-flex justify-content-center">
+        	<p>
+        		<%= paginate @comments, theme: 'bootstrap-5' %>
+        	</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

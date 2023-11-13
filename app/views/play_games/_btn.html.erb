@@ -1,0 +1,19 @@
+<% if user_signed_in? %>
+  <% if current_user.nickname != 'ゲスト' %>
+    <% if game.played_by?(current_user) %>
+      <%= link_to game_play_games_path(game), method: :delete do %>
+        <i class="fa-solid fa-gamepad" aria-hidden="true" style="color: brown;"></i>
+        : <%= game.play_games.count %>人
+      <% end %>
+    <% else %>
+      <%= link_to game_play_games_path(game), method: :post do %>
+        <i class="fa-solid fa-gamepad" aria-hidden="true"></i>
+        : <%= game.play_games.count %>人
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= game.play_games.count %>人
+  <% end %>
+<% elsif admin_signed_in? %>
+  <%= game.play_games.count %>人
+<% end %>

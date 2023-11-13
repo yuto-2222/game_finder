@@ -1,0 +1,36 @@
+<table class=" table border border-dark", style="width:80%;">
+  <th class="text-center align-middle border-bottom border-dark">
+    info
+  </th>
+  <tr>
+    <td class="align-middle">
+      <p>ゲーム名:</p> <span><%= game.name %></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="align-middle">
+      <p>ジャンル:</p> <span><%= game.genre.name %></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="align-middle">
+      <p>発売日:</p> <span><%= game.release_date %></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="align-middle">
+      <p>プレイしたことある人:</p> <span><%= render 'play_games/btn', game: game %></span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <% if user_signed_in? %>
+        <% if current_user.nickname != 'ゲスト' %>
+          <%= link_to 'Edit', edit_game_path(game) %>
+        <% end %>
+      <% elsif admin_signed_in? %>
+        <%= link_to 'Edit', edit_game_path(game) %>
+      <% end %>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,38 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-3 mt-5'>
+			<div>
+				<%= render 'layouts/genre', genres: @genres %>
+			</div>
+		</div>
+
+    <div class='col-9 mt-5'>
+      <% if @games.empty? %>
+  			<p class="font-weight-bold d-flex justify-content-center">「<%= params[:content] %>」で検索したゲームは見つかりませんでした。</p>
+			<% else %>
+	    	<div class="my-3">
+	    		<span class="h2 mr-2">「<%= params[:content] %>」の検索一覧</span> <span>(全<%= @games.count %>件)</span>
+	    		<span class="ml-2">
+						<% if user_signed_in? %>
+							<% if current_user.nickname != 'ゲスト' %>
+								<%= link_to 'ゲームを追加', new_game_path %>
+							<% end %>
+						<% elsif admin_signed_in? %>
+							<%= link_to 'ゲームを追加', new_game_path %>
+						<% end %>
+					</span>
+	    	</div>
+    		<%= link_to '新しい順', search_path(content: params[:content], latest: "true") %> |
+				<%= link_to '古い順', search_path(content: params[:content], earliest: "true") %> |
+				<%= link_to '人気順', search_path(content: params[:content], popular: "true") %>
+    		<%= render 'games/index', games: @games %>
+
+      	<div class="d-flex justify-content-center">
+  				<p>
+    				<%= paginate @games, theme: 'bootstrap-5' %>
+  				</p>
+ 				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

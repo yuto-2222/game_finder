@@ -1,0 +1,18 @@
+<h2>ジャンル追加</h2>
+<%= render 'layouts/errors', obj: @genre %>
+
+<%= form_with model: @genre, url: admin_genres_path, local:true do |f| %>
+  <div class="form-group d-flex justify-content-between text-nowrap mt-3 mb-3">
+    <%= f.label :ジャンル名, class: "font-weight-bold mr-5" %>
+    <%= f.text_field :name, placeholder: "ジャンル名を入力", class: "form-control name mr-5 ml-5" %>
+    <%= f.submit :新規登録, class: 'btn btn-success ml-5' %>
+  </div>
+<% end %>
+
+<h2>ジャンル一覧</h2>
+<% @genres.each do |genre| %>
+  <div>
+    <%= genre.name %></br>
+    <%= link_to '編集', edit_admin_genre_path(genre) %>
+  </div>
+<% end %>
