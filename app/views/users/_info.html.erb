@@ -14,23 +14,23 @@
 	</tr>
 	<tr>
 		<td class="align-middle">
-			<p>ニックネーム:</p>
+			<p>ニックネーム</p>
 			<div class="text-center"><%= user.nickname %></div>
 		</td>
 	</tr>
 	<tr>
 		<td class="align-middle">
-			<p>イントロダクション:</p>
+			<p>イントロダクション</p>
 			<div class="text-center"><%= user.introduction %></div>
 		</td>
 	</tr>
-	<tr>
-		<td class="text-center align-middle">
-			<% if user == current_user or admin_signed_in? %>
-				<% if user.nickname != 'ゲスト' %>
+	<% if user == current_user or admin_signed_in? %>
+		<% if user.nickname != 'ゲスト' %>
+			<tr>
+				<td class="text-center align-middle">
 					<div><%= link_to '編集', edit_user_path(params[:id]) %></div>
-				<% end %>
-			<% end %>
-		</td>
-	</tr>
+				</td>
+			</tr>
+		<% end %>
+	<% end %>
 </table>

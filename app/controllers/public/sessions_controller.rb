@@ -18,6 +18,12 @@ class Public::SessionsController < Devise::SessionsController
     redirect_to games_path, notice: 'ゲストログインしました'
   end
 
+  def guest_sign_out
+    user = User.guest
+    sign_out user
+    redirect_to new_user_registration_path
+  end
+
   protected
 
   def user_state

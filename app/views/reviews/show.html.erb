@@ -1,4 +1,11 @@
 <div class='container'>
+  <% if current_user.nickname == 'ゲスト' %>
+    <div class="text-center mt-4 mb-2">
+			ゲストの方は
+			<%= link_to "こちら", users_guest_sign_out_path, method: :post %>
+		  からサインアップできます
+		</div>
+  <% end %>
   <div class='row'>
     <div class='col-3 mt-5'>
 			<div>
@@ -8,11 +15,11 @@
 		<div class='col-9 mt-5'>
     	<div class="my-3">
     		<span class="h2 mr-2">コメント一覧</span> <span>(全<%= @review.comments.count %>件)</span>
-				<span class="ml-2">
+				<div class="ml-2">
 					<%= link_to 'レビュー一覧に戻る', game_reviews_path(@review.game, @review) %>
-				</span>
+				</div>
 
-  			<table class='table table-hover'>
+  			<table class='table table-hover mt-2'>
   				<thead class="bg-light">
   					<tr>
   						<th></th>
@@ -29,7 +36,7 @@
   				<tbody>
   				  <tr>
   				    <td>
-  				      <%= image_tag @review.user.get_profile_image, size: "90x90" %>
+  				      <%= image_tag @review.user.get_profile_image, size: "100x100" %>
   				    </td>
   				    <td class="text-center align-middle text-dark">
   				      <%= link_to @review.user.nickname, user_path(@review.user.id) %>
@@ -55,13 +62,13 @@
 				</table>
 
         <%= render 'comments/index', comments: @comments %>
-        
+
         <% if user_signed_in? %>
           <% if current_user.nickname != 'ゲスト' %>
             <%= render 'comments/form', game: @game, review: @review, comment: @comment %>
           <% end %>
         <% end %>
-        
+
         <div class="d-flex justify-content-center">
         	<p>
         		<%= paginate @comments, theme: 'bootstrap-5' %>

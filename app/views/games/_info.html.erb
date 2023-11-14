@@ -22,15 +22,19 @@
       <p>プレイしたことある人:</p> <span><%= render 'play_games/btn', game: game %></span>
     </td>
   </tr>
-  <tr>
-    <td>
-      <% if user_signed_in? %>
-        <% if current_user.nickname != 'ゲスト' %>
+  <% if user_signed_in? %>
+    <% if current_user.nickname != 'ゲスト' %>
+      <tr>
+        <td>
           <%= link_to 'Edit', edit_game_path(game) %>
-        <% end %>
-      <% elsif admin_signed_in? %>
+        </td>
+      </tr>
+    <% end %>
+  <% elsif admin_signed_in? %>
+    <tr>
+      <td>
         <%= link_to 'Edit', edit_game_path(game) %>
-      <% end %>
-    </td>
-  </tr>
+      </td>
+    </tr>
+  <% end %>
 </table>

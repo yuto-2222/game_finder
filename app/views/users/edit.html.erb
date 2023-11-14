@@ -1,57 +1,57 @@
-<% if @user == current_user %>
-  <%= form_with model: @user do |f| %>
-    <%= render 'layouts/errors', obj: @user %>
-    <div class="form-group">
-      <%= f.label :profile_image, 'イメージ(なくてもOK)' %>
-      <%= f.file_field :profile_image, accept: 'image/*' %>
-    </div>
+<div class="container">
+  <div class="row">
 
-    <div class="form-group">
-      <%= f.label :nickname, 'ニックネーム' %>
-      <%= f.text_field :nickname %>
-    </div>
+    <p class="font-weight-bold bg-secondary bg-secondary text-light mx-auto mt-5 p-1 h5">
+			ユーザー情報編集
+		</p>
+	</div>
 
-    <div class="form-group">
-      <%= f.label :introduction, 'イントロダクション(空欄可)' %>
-      <%= f.text_area :introduction %>
-    </div>
+	<div class="row">
+		<div class="col-6 mx-auto">
+			<%= render 'layouts/errors', obj: @user %>
+      <% if @user == current_user or admin_signed_in? %>
+        <%= form_with model: @user do |f| %>
+          <div class="form-group text-nowrap mt-3 mb-3">
+            <%= image_tag @user.get_profile_image, size: '100×100', class: "ml-4" %></br>
+            <%= f.label :profile_image, 'イメージ(なくてもOK)' %></br>
+            <%= f.file_field :profile_image, accept: 'image/*', class: "ml-4" %>
+          </div>
 
-    <div class="form-group">
-      <%= f.submit 'アップデート', class: 'btn btn-secondary' %>
-    </div>
-  <% end %>
+          <div class="form-group text-nowrap mt-3 mb-3">
+            <%= f.label :nickname, 'ニックネーム' %></br>
+            <%= f.text_field :nickname, class: "ml-4" %>
+          </div>
 
-  <div>
-    <%= button_to '退会する', cancel_user_path(@user), method: :patch,
-        data: { confirm: '本当に退会しますか？' }, class: "btn btn-danger ml-4" %>
+          <div class="form-group text-nowrap mt-3 mb-3">
+            <%= f.label :introduction, 'イントロダクション(空欄可)' %></br>
+            <%= f.text_area :introduction, rows: '3', cols: '30', class: "ml-4" %>
+          </div>
+
+          <% if admin_signed_in? %>
+            <div class="form-group text-nowrap mt-3 mb-3">
+              <%= f.label :is_active, "会員ステータス" %>
+              <div class="form-inline">
+                <%= f.radio_button :is_active, :true, checked: @user.is_active, class: "ml-4 form-control" %>
+                <%= label_tag 'is_active_true', '有効' %>
+                <%= f.radio_button :is_active, :false, checked: !@user.is_active, class: "ml-4 form-control" %>
+                <%= label_tag 'is_active_false', '退会' %>
+              </div>
+            </div>
+          <% end %>
+
+          <div class="form-group text-center">
+            <%= f.submit 'アップデート', class: 'btn btn-secondary' %>
+          </div>
+        <% end %>
+
+        <% if @user == current_user %>
+          <div class="text-center">
+            <%= button_to '退会する', cancel_user_path(@user), method: :patch,
+                data: { confirm: '本当に退会しますか？' }, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+
+      <% end %>
+    </div>
   </div>
-
-<% elsif admin_signed_in? %>
-  <%= form_with model: @user do |f| %>
-    <div>ニックネーム</div>
-    <div>
-      <%= @user.nickname %>
-    </div>
-    <!--<div>-->
-      <%#= @user.image %>
-    <!--</div>-->
-    <div>イントロダクション</div>
-    <div>
-      <%= @user.introduction %>
-    </div>
-    <div>
-      <%= f.label :is_active, "会員ステータス" %>
-      <div class="form-inline ">
-        <%= f.radio_button :is_active, :true, checked: @user.is_active, class:"form-control" %>
-        <%= label_tag 'is_active_true', '有効', class:"mr-5" %>
-        <%= f.radio_button :is_active, :false, checked: !@user.is_active, class:"ml-5 form-control" %>
-        <%= label_tag 'is_active_false', '退会' %>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= f.submit 'アップデート', class: 'btn btn-secondary' %>
-    </div>
-  <% end %>
-
-<% else %>
-<% end %>
+</div>

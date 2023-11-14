@@ -1,11 +1,18 @@
 <div class='container'>
+	<% if current_user.nickname == 'ゲスト' %>
+    <div class="text-center mt-4 mb-2">
+			ゲストの方は
+			<%= link_to "こちら", users_guest_sign_out_path, method: :post %>
+		  からサインアップできます
+		</div>
+  <% end %>
   <div class='row'>
     <div class='col-3 mt-5'>
 			<div>
 				<%= render 'games/info', game: @game %>
 			</div>
 		</div>
-		
+
 		<div class='col-9 mt-5'>
     	<div class="my-3">
     		<span class="h2 mr-2">レビュー一覧</span> <span>(全<%= @game.reviews.count %>件)</span>

@@ -1,9 +1,11 @@
-<% comments.each do |comment| %>
-	<table class="ml-5">
+<table class="table table-hover ml-5">
+	<% comments.each do |comment| %>
 		<tr>
 			<td class="text-center align-middle text-dark">
-			  <%= image_tag comment.user.get_profile_image, size: "60×60" %></br>
-			  <%= link_to comment.user.nickname, user_path(comment.user.id) %>
+				<%= link_to user_path(comment.user.id) do %>
+				  <%= image_tag comment.user.get_profile_image, size: "60×60" %></br>
+				  <%= comment.user.nickname %>
+		  	<% end %>
 		  </td>
 		  <td class="text-center align-middle text-dark">
 		  	<%= comment.content %>
@@ -15,5 +17,5 @@
 		    </td>
 	    <% end %>
 		</tr>
-	</table>
-<% end %>
+	<% end %>
+</table>

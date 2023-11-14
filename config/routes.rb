@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/users/sign_out' => 'public/sessions#destroy'
     post '/users/guest_sign_in' => 'public/sessions#guest_sign_in'
+    post '/users/guest_sign_out' => 'public/sessions#guest_sign_out'
   end
 
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
@@ -37,11 +38,7 @@ Rails.application.routes.draw do
     resource :play_games, only: [:create, :destroy]
     resources :reviews, except: [:edit, :update] do
       resource :usefuls, only: [:create, :destroy]
-      resources :comments, only: [:create] do
-        member do
-          get :destroy
-        end
-      end
+      resources :comments, only: [:create, :destroy]
     end
   end
 

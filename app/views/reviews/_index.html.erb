@@ -18,7 +18,9 @@
           <% reviews.each do |review| %>
             <tr>
               <td>
-                <%= image_tag review.user.get_profile_image, size: "90x90" %>
+                <%= link_to user_path(review.user.id) do %>
+                  <%= image_tag review.user.get_profile_image, size: "90x90" %>
+                <% end %>
               </td>
               <td class="text-center align-middle text-dark">
                 <%= link_to review.user.nickname, user_path(review.user.id) %>
@@ -46,15 +48,11 @@
               </td>
               <td class="text-center align-middle text-dark">
                 <% if user_signed_in? %>
-                  <% if current_user.nickname != 'ゲスト' %>
-                    <%= link_to 'コメントを書く', game_review_path(@game, review) %>
-                  <% else %>
-                    <%= link_to 'コメント一覧', game_review_path(@game, review) %>
-                  <% end %>
+                  <%= link_to 'コメント', game_review_path(@game, review) %>
                 <% elsif admin_signed_in? %>
                   <%= button_to 'レビュー削除', game_review_path(@game, review), method: :delete,
                       data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger my-2" %>
-                  <%= link_to 'コメント一覧', game_review_path(@game, review) %>
+                  <%= link_to 'コメント', game_review_path(@game, review) %>
                 <% end %>
               </td>
             </tr>

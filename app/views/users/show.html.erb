@@ -1,46 +1,65 @@
 <div class='container'>
-  <div class='row'>
-    <div class='col-3 mt-5'>
-			<div>
-				<%= render 'info', user: @user %>
+  <% if @user.nickname != 'ゲスト' %>
+  	<div class='row'>
+	    <div class='col-3 mt-5'>
+				<div>
+					<%= render 'info', user: @user %>
+				</div>
 			</div>
-		</div>
 
-		<div class='col-9 mt-5'>
-    	<div class="my-3">
-    		<span class="h2 mr-2">レビュー一覧</span> <span>(全<%= @user.reviews.count %>件)</span>
-				<table class='table table-hover mt-2'>
-					<thead class="bg-light">
-						<tr>
-							<th>ゲーム名</th>
-							<th>レビュー</th>
-							<!--<th>レーティング</th>-->
-							<th>役立った</th>
-							<th>コメント数</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<% @reviews.each do |review| %>
+			<div class='col-9 mt-5'>
+	    	<div class="my-3">
+	    		<span class="h2 mr-2">レビュー一覧</span> <span>(全<%= @user.reviews.count %>件)</span>
+					<table class='table table-hover mt-2'>
+						<thead class="bg-light">
 							<tr>
-								<td class="text-center align-middle text-dark">
-									<%= link_to review.game.name, game_reviews_path(review.game) %>
-								</td>
-								<td class="text-center align-middle text-dark">
-									<%= link_to review.content, game_review_path(review.game, review) %>
-								</td>
-								<!--<td class="text-center align-middle text-dark">rating</td>-->
-								<td class="text-center align-middle text-dark">
-									<%= review.usefuls.count %>
-								</td>
-								<td class="text-center align-middle text-dark">
-									<%= review.comments.count %>
-								</td>
+								<th>ゲーム名</th>
+								<th>レビュー</th>
+								<!--<th>レーティング</th>-->
+								<th>役立った</th>
+								<th>コメント数</th>
 							</tr>
-						<% end %>
-					</tbody>
-				</table>
+						</thead>
+
+						<tbody>
+							<% @reviews.each do |review| %>
+								<tr>
+									<td class="text-center align-middle text-dark">
+										<%= link_to review.game.name, game_reviews_path(review.game) %>
+									</td>
+									<td class="text-center align-middle text-dark">
+										<%= link_to review.content, game_review_path(review.game, review) %>
+									</td>
+									<!--<td class="text-center align-middle text-dark">rating</td>-->
+									<td class="text-center align-middle text-dark">
+										<%= review.usefuls.count %>
+									</td>
+									<td class="text-center align-middle text-dark">
+										<%= review.comments.count %>
+									</td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
+	<% else %>
+	  <div class="text-center mt-4 mb-2">
+			ゲストの方は
+			<%= link_to "こちら", users_guest_sign_out_path, method: :post %>
+		  からサインアップできます
+		</div>
+		<p class="text-center mt-5 mb-5 h2">
+			お試しいただき</br>
+			ありがとうございます
+		</p>
+		<p class="text-center h5">
+			ゲストは閲覧のみになります。</br>
+			ゲームを追加したりレビューやコメントで</br>
+			一緒にこのサイトを盛り上げていただけたら、</br>
+			とても嬉しいです。</br>
+			上記からサインアップお願いします！
+		</p>
+	<% end %>
 </div>
