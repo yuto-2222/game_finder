@@ -6,7 +6,7 @@
   <%= form_with url: genre_search_path, method: :get do |f| %>
     <% genres.each do |genre| %>
       <tr>
-        <td class="border border-0 align-middle"><%= link_to genre.name, genre_search_path(genre_id: genre.id), method: :get %></td>
+        <td class="border border-0 text-center align-middle"><%= link_to genre.name, genre_search_path(genre_id: genre.id), method: :get %></td>
       </tr>
     <% end %>
   <% end %>

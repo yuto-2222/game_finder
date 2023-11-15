@@ -1,13 +1,22 @@
-<h2>ジャンル編集</h2>
-
-<%= render 'layouts/errors', obj: @genre %>
-
-<%= form_with model: @genre, url: admin_genre_path, local:true do |f| %>
-  <div class="form-group d-flex justify-content-between text-nowrap mt-3 mb-3">
-    <%= f.label :ジャンル名, class: "font-weight-bold mr-5" %>
-    <%= f.text_field :name, placeholder: "ジャンル名を入力", class: "form-control name mr-5 ml-5" %>
-    <%= f.submit :変更を保存, class: 'btn btn-success ml-5' %>
+<div class="container">
+  <div class="row">
+    <p class="font-weight-bold bg-secondary text-light mx-auto my-4 h4">
+      ジャンル編集
+    </p>
   </div>
-<% end %>
 
-<%= link_to '戻る', admin_genres_path %>
+
+  <div class="col-lg-6 mx-auto">
+    <%= render 'layouts/errors', obj: @genre %>
+    <%= form_with model: @genre, url: admin_genre_path, local:true do |f| %>
+      <div class="form-group d-flex justify-content-between align-items-center text-nowrap my-3">
+        <%= f.label :ジャンル名, class: "font-weight-bold mx-2" %>
+        <%= f.text_field :name, placeholder: "ジャンル名を入力", class: "form-control name mx-4" %>
+        <%= f.submit :変更を保存, class: 'btn btn-success mx-2' %>
+      </div>
+    <% end %>
+    <div class="text-center">
+      <%= link_to 'ジャンル一覧へ', admin_genres_path %>
+    </div>
+  </div>
+</div>

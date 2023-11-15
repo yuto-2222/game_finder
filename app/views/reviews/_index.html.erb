@@ -1,64 +1,49 @@
-<div class="container">
-	<div class="row">
-		<div class="col">
-			<table class='table table-hover'>
-				<thead class="bg-light">
-					<tr>
-						<th></th>
-						<th>ニックネーム</th>
-						<th>レビュー</th>
-						<th>役立った</th>
-						<!--<th>レーティング</th>-->
-						<th>コメント数</th>
-						<th></th>
-					</tr>
-				</thead>
+<table class='table table-hover mt-3'>
+	<thead class="bg-light">
+		<tr>
+			<th></th>
+			<th>ニックネーム</th>
+			<th>レビュー</th>
+			<th>役立った</th>
+			<!--<th>レーティング</th>-->
+			<th>コメント数</th>
+			<th></th>
+		</tr>
+	</thead>
 
-				<tbody>
-          <% reviews.each do |review| %>
-            <tr>
-              <td>
-                <%= link_to user_path(review.user.id) do %>
-                  <%= image_tag review.user.get_profile_image, size: "90x90" %>
-                <% end %>
-              </td>
-              <td class="text-center align-middle text-dark">
-                <%= link_to review.user.nickname, user_path(review.user.id) %>
-              </td>
-              <td class="text-center align-middle text-dark">
-                <%= review.content %>
-              </td>
-              <td class="text-center align-middle text-dark">
-                <%= render 'usefuls/btn', review: review %>
-              </td>
-              <!--<td>-->
-                <!--平均点を算出し、round関数で切り上げ-->
-                <!--<%#=@rating %>：<%#= review.average(:rating).to_f.round(1) %>-->
-                <!--評価数を星に置き換える-->
-                <!-- <div class="average-review-rating" data-score=<%#= review.average(:rating) %>></div>-->
-
-                <!--<th class="table__col1">評価</th>-->
-                <!-- <td class="table__col1">  <div class="field" id="star"><%# f.label :rating %></div></td>-->
-                <!--</tr>-->
-
-                <!--<%#= render partial: "reviews/static_rate", locals: { review: review } %>-->
-              <!--</td>-->
-              <td class="text-center align-middle text-dark">
-                <%= review.comments.count %>
-              </td>
-              <td class="text-center align-middle text-dark">
-                <% if user_signed_in? %>
-                  <%= link_to 'コメント', game_review_path(@game, review) %>
-                <% elsif admin_signed_in? %>
-                  <%= button_to 'レビュー削除', game_review_path(@game, review), method: :delete,
-                      data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger my-2" %>
-                  <%= link_to 'コメント', game_review_path(@game, review) %>
-                <% end %>
-              </td>
-            </tr>
+	<tbody>
+    <% reviews.each do |review| %>
+      <tr>
+        <td>
+          <%= link_to user_path(review.user.id) do %>
+            <%= image_tag review.user.get_profile_image, size: "90x90" %>
           <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+        </td>
+        <td class="text-center align-middle text-dark">
+          <%= link_to review.user.nickname, user_path(review.user.id) %>
+        </td>
+        <td class="text-center align-middle text-dark">
+          <%= review.content %>
+        </td>
+        <td class="text-center align-middle text-dark", id="useful_buttons_<%= review.id %>">
+          <%= render 'usefuls/btn', review: review %>
+        </td>
+        <!--<td>-->
+        <!--  rating-->
+        <!--</td>-->
+        <td class="text-center align-middle text-dark">
+          <%= review.comments.count %>
+        </td>
+        <td class="text-center align-middle text-dark">
+          <% if user_signed_in? %>
+            <%= link_to 'コメント', game_review_path(@game, review) %>
+          <% elsif admin_signed_in? %>
+            <%= button_to 'レビュー削除', game_review_path(@game, review), method: :delete,
+                data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger my-2" %>
+            <%= link_to 'コメント', game_review_path(@game, review) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

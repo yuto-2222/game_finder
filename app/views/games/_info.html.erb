@@ -4,36 +4,39 @@
   </th>
   <tr>
     <td class="align-middle">
-      <p>ゲーム名:</p> <span><%= game.name %></span>
+      <p>ゲーム名:</p> <div class="text-center"><%= game.name %></div>
     </td>
   </tr>
   <tr>
     <td class="align-middle">
-      <p>ジャンル:</p> <span><%= game.genre.name %></span>
+      <p>ジャンル:</p> <div class="text-center"><%= game.genre.name %></div>
     </td>
   </tr>
   <tr>
     <td class="align-middle">
-      <p>発売日:</p> <span><%= game.release_date %></span>
+      <p>発売日:</p> <div class="text-center"><%= game.release_date %></div>
     </td>
   </tr>
   <tr>
     <td class="align-middle">
-      <p>プレイしたことある人:</p> <span><%= render 'play_games/btn', game: game %></span>
+      <p>プレイしたことある人:</p>
+      <div class="text-center", id="play_game_buttons_<%= game.id %>">
+        <%= render 'play_games/btn', game: game %>
+      </div>
     </td>
   </tr>
   <% if user_signed_in? %>
     <% if current_user.nickname != 'ゲスト' %>
       <tr>
-        <td>
-          <%= link_to 'Edit', edit_game_path(game) %>
+        <td class="text-center">
+          <%= link_to '編集', edit_game_path(game) %>
         </td>
       </tr>
     <% end %>
   <% elsif admin_signed_in? %>
     <tr>
-      <td>
-        <%= link_to 'Edit', edit_game_path(game) %>
+      <td class="text-center">
+        <%= link_to '編集', edit_game_path(game) %>
       </td>
     </tr>
   <% end %>

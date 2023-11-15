@@ -1,19 +1,21 @@
 <div class='container'>
-	<% if current_user.nickname == 'ゲスト' %>
-    <div class="text-center mt-4 mb-2">
-			ゲストの方は
-			<%= link_to "こちら", users_guest_sign_out_path, method: :post %>
-		  からサインアップできます
-		</div>
+	<% if user_signed_in? %>
+		<% if current_user.nickname == 'ゲスト' %>
+	    <div class="text-center mt-4 mb-2">
+				ゲストの方は
+				<%= link_to "こちら", users_guest_sign_out_path, method: :post %>
+			  からサインアップできます
+			</div>
+	  <% end %>
   <% end %>
   <div class='row'>
-    <div class='col-3 mt-5'>
+    <div class='col-md-3 mt-5'>
 			<div>
 				<%= render 'layouts/genre', genres: @genres %>
 			</div>
 		</div>
 
-    <div class='col-9 mt-5'>
+    <div class='col-md-9 mt-5'>
     	<div class="my-3">
     		<span class="h2 mr-2"><%= @genre.name %>一覧</span> <span>(全<%= @games.count %>件)</span>
     		<div class="ml-2">

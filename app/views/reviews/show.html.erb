@@ -1,10 +1,12 @@
 <div class='container'>
-  <% if current_user.nickname == 'ゲスト' %>
-    <div class="text-center mt-4 mb-2">
-			ゲストの方は
-			<%= link_to "こちら", users_guest_sign_out_path, method: :post %>
-		  からサインアップできます
-		</div>
+  <% if user_signed_in? %>
+		<% if current_user.nickname == 'ゲスト' %>
+	    <div class="text-center mt-4 mb-2">
+				ゲストの方は
+				<%= link_to "こちら", users_guest_sign_out_path, method: :post %>
+			  からサインアップできます
+			</div>
+	  <% end %>
   <% end %>
   <div class='row'>
     <div class='col-3 mt-5'>
@@ -19,7 +21,7 @@
 					<%= link_to 'レビュー一覧に戻る', game_reviews_path(@review.game, @review) %>
 				</div>
 
-  			<table class='table table-hover mt-2'>
+  			<table class='table table-hover mt-3'>
   				<thead class="bg-light">
   					<tr>
   						<th></th>
@@ -44,12 +46,12 @@
   				    <td class="text-center align-middle text-dark">
   				      <%= @review.content %>
   				    </td>
-  				    <td class="text-center align-middle text-dark">
+  				    <td class="text-center align-middle text-dark", id="useful_buttons_<%= @review.id %>">
   				      <%= render 'usefuls/btn', review: @review %>
   				    </td>
-  				    <!--<td class="text-center align-middle text-dark">-->
-  				    <!--  <%#= render partial: "reviews/show_rate", locals: { game: @game } %>-->
-  				    <!--</td>-->
+  				    <!--<td>-->
+          <!--      rating-->
+          <!--    </td>-->
   				    <% if admin_signed_in? %>
   				      <td class="text-center align-middle text-dark">
                   <%= button_to 'レビュー削除', game_review_path(@game, @review), method: :delete,

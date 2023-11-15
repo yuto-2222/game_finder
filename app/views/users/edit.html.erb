@@ -1,6 +1,5 @@
 <div class="container">
   <div class="row">
-
     <p class="font-weight-bold bg-secondary bg-secondary text-light mx-auto mt-5 p-1 h5">
 			ユーザー情報編集
 		</p>
@@ -9,10 +8,9 @@
 	<div class="row">
 		<div class="col-6 mx-auto">
 			<%= render 'layouts/errors', obj: @user %>
-      <% if @user == current_user or admin_signed_in? %>
+
         <%= form_with model: @user do |f| %>
           <div class="form-group text-nowrap mt-3 mb-3">
-            <%= image_tag @user.get_profile_image, size: '100×100', class: "ml-4" %></br>
             <%= f.label :profile_image, 'イメージ(なくてもOK)' %></br>
             <%= f.file_field :profile_image, accept: 'image/*', class: "ml-4" %>
           </div>
@@ -51,7 +49,7 @@
           </div>
         <% end %>
 
-      <% end %>
+
     </div>
   </div>
 </div>

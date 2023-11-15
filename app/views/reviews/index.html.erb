@@ -1,10 +1,12 @@
 <div class='container'>
-	<% if current_user.nickname == 'ゲスト' %>
-    <div class="text-center mt-4 mb-2">
-			ゲストの方は
-			<%= link_to "こちら", users_guest_sign_out_path, method: :post %>
-		  からサインアップできます
-		</div>
+	<% if user_signed_in? %>
+		<% if current_user.nickname == 'ゲスト' %>
+	    <div class="text-center mt-4 mb-2">
+				ゲストの方は
+				<%= link_to "こちら", users_guest_sign_out_path, method: :post %>
+			  からサインアップできます
+			</div>
+	  <% end %>
   <% end %>
   <div class='row'>
     <div class='col-3 mt-5'>

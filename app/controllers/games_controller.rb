@@ -14,7 +14,6 @@ class GamesController < ApplicationController
       @games = Game.all.page(params[:page]).per(8)
     end
 
-    @rating = '評価'
     @genres = Genre.all
   end
 

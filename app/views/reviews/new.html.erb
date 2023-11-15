@@ -1,9 +1,21 @@
-<%= render 'games/info', game: @game %>
+<div class='container'>
+	<div class='row'>
+	  <div class='col-md-3 mt-5'>
+			<div>
+				<%= render 'games/info', game: @game %>
+			</div>
+		</div>
 
-<h1>レビュー作成</h1>
-
-<%= render 'reviews/form', review: @review, game: @game %>
-
-<%#<%= render "reviews/static_rate", review: @review %>
-
-<%= link_to '戻る', game_reviews_path(@game) %>
+		<div class='col-md-9 mt-5'>
+			<div class="my-3">
+				<div class="h2">レビュー作成</div>
+			</div>
+			<div>
+				<%= render 'reviews/form', review: @review, game: @game, rating: @rating %>
+			</div>
+			<div class="mt-3">
+				<%= link_to 'レビュー一覧へ', game_reviews_path(@game) %>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :user_or_admin?
-  # before_action :guest_not_edit, only: [:edit]
+  before_action :ensure_correct_user, only: [:edit, :update]
+
 
   def show
     @user = User.find(params[:id])
@@ -41,6 +42,13 @@ class UsersController < ApplicationController
 
 
   private
+
+  def ensure_correct_user
+    @user = User.find(params[:id])
+    unless @user == current_user or admin_signed_in?
+      redirect_to user_path(current_user)
+    end
+  end
 
   def user_params
     params.require(:user).permit(:nickname, :email, :introduction, :is_active)
