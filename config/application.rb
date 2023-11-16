@@ -17,7 +17,7 @@ module GameFinder
     # in config/environments, which are processed later.
 
     #タイムゾーンを日本に
-    config.time_zone = 'Asia/Tokyo'
+    config.time_zone = 'Tokyo'
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

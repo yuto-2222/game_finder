@@ -1,0 +1,28 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-10 mt-3 mx-auto'>
+      <div class="h4 text-center">
+        通知
+      </div>
+
+      <% if @notifications.present? %>
+        <%= link_to "全削除",notification_path(@notifications), method: :delete, class: "mb-3 btn btn-light" %>
+          <table class="table">
+            <% @notifications.each do |notification| %>
+              <tr>
+                <td>
+                  <div class="ml-3">
+                    <%= render "#{notification.action}", notification: notification %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+      <% else %>
+        <div class="text-center">
+          通知はありません
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

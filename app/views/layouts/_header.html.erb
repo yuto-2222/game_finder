@@ -15,6 +15,16 @@
                 <li class="d-flex mr-4">
                   <%= link_to "ゲーム一覧", games_path, class: "btn btn-outline-secondary" %>
                 </li>
+                <li class="d-flex mr-4">
+                  <%= link_to notifications_path, class: "btn btn-outline-secondary" do %>
+                    <% if current_user.notifications.where(checked: false).exists? %>
+                      <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #f2ee7d;"></i>
+                    <% else %>
+                      <i class="fa-sharp fa-solid fa-bell"></i>
+                    <% end %>
+                    通知一覧
+                  <% end %>
+                </li>
                 <li class="d-flex">
                   <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" %>
                 </li>
