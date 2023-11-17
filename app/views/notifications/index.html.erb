@@ -2,11 +2,11 @@
   <div class='row'>
     <div class='col-md-10 mt-3 mx-auto'>
       <div class="h4 text-center">
-        通知
+        Notifications
       </div>
 
       <% if @notifications.present? %>
-        <%= link_to "全削除",notification_path(@notifications), method: :delete, class: "mb-3 btn btn-light" %>
+        <%= link_to "All Delete",notification_path(@notifications), method: :delete, class: "mb-3 btn btn-light" %>
           <table class="table">
             <% @notifications.each do |notification| %>
               <tr>

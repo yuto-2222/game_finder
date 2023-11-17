@@ -5,14 +5,13 @@
 			New Game
 		</p>
 	</div>
-	<p class="text-center">みんながわかる名前でお願いします！</p>
 
 	<div class="row">
 		<div class="col-6 mx-auto">
 			<%= render 'layouts/errors', obj: @game %>
 			<%= render 'form', game: @game %>
 			<div class="mt-3 text-center">
-				<%= link_to '< 一覧に戻る >', games_path %>
+				<%= link_to '< Games List >', games_path %>
 			</div>
 		</div>
 	</div>

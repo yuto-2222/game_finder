@@ -2,9 +2,8 @@
 	<% if user_signed_in? %>
 		<% if current_user.nickname == 'ゲスト' %>
 	    <div class="text-center mt-4 mb-2">
-				ゲストの方は
-				<%= link_to "こちら", users_guest_sign_out_path, method: :post %>
-			  からサインアップできます
+				Sign up
+				<%= link_to "here", users_guest_sign_out_path, method: :post %>
 			</div>
 	  <% end %>
   <% end %>
@@ -20,14 +19,14 @@
   			<p class="font-weight-bold d-flex justify-content-center">「<%= params[:content] %>」で検索したゲームは見つかりませんでした。</p>
 			<% else %>
 	    	<div class="my-3">
-	    		<span class="h2 mr-2">「<%= params[:content] %>」の検索一覧</span> <span>(全<%= @games.count %>件)</span>
+	    		<span class="h2 mr-2">「<%= params[:content] %>」Search List</span> <span>(全<%= @games.count %>件)</span>
 	    		<div class="ml-2">
 						<% if user_signed_in? %>
 							<% if current_user.nickname != 'ゲスト' %>
-								<%= link_to 'ゲームを追加', new_game_path %>
+								<%= link_to 'Add game', new_game_path %>
 							<% end %>
 						<% elsif admin_signed_in? %>
-							<%= link_to 'ゲームを追加', new_game_path %>
+							<%= link_to 'Add game', new_game_path %>
 						<% end %>
 					</div>
 	    	</div>

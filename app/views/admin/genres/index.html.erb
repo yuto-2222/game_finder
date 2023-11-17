@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <p class="font-weight-bold bg-secondary text-light mx-auto my-4 p-1 h4">
-      ジャンル追加・一覧
+      Genres List
     </p>
   </div>
 
@@ -10,9 +10,9 @@
       <%= render 'layouts/errors', obj: @genre %>
       <%= form_with model: @genre, url: admin_genres_path, local:true do |f| %>
         <div class="form-group d-flex justify-content-between align-items-center text-nowrap mt-3 mb-3">
-          <%= f.label :ジャンル名, class: "font-weight-bold mx-2" %>
-          <%= f.text_field :name, placeholder: "ジャンル名を入力", class: "form-control name mx-4" %>
-          <%= f.submit :追加, class: 'btn btn-success mx-2' %>
+          <%= f.label :Genre, class: "font-weight-bold mx-2" %>
+          <%= f.text_field :name, placeholder: "Type genre name", class: "form-control name mx-4" %>
+          <%= f.submit :Create, class: 'btn btn-success mx-2' %>
         </div>
       <% end %>
     </div>
@@ -23,7 +23,7 @@
       <table class="table">
         <thead class="bg-light">
           <tr>
-            <th>ジャンル</th>
+            <th>Genre name</th>
             <th></th>
           </tr>
         </thead>
@@ -38,7 +38,7 @@
               </td>
               <td>
                 <%= link_to edit_admin_genre_path(genre), class: "btn btn-success" do%>
-                  編集
+                  Edit
                 <% end %>
               </td>
             </tr>

@@ -7,7 +7,7 @@ class User < ApplicationRecord
   # バリデーション
   validates :nickname, presence: true,  uniqueness: true
   validates :email, presence: true, format: { with: /\A[a-zA-Z0-9]{1,}[@][a-zA-Z0-9]{1,}[.][a-zA-Z0-9]{1,}\z/ }, uniqueness: true
-  validates :password, length: { minimum: 6, maximum: 50 }, on: :create
+  validates :password, length: { minimum: 6, maximum: 20 }, on: :create
 
   # アソシエーション
   has_many :reviews, dependent: :destroy

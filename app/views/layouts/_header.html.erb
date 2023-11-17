@@ -1,68 +1,69 @@
-<header class="border-bottom border-dark">
-  <div class="navbar navbar-expand-lg navbar-light">
+<header class="fixed-top border-bottom border-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <div class="col-3" style="right:100px;">
-         <a class="navbar-brand" href="/" ><span>GAME FINDER</span></a>
-      </div>
-      <div class="col-9 mt-1">
-        <div class="row">
-          <div class="col-12">
-            <div class="d-flex justify-content-end">
-              <% if user_signed_in? %>
-                <li class="d-flex mr-4">
-                  <%= link_to "マイページ", user_path(current_user), class: "btn btn-outline-secondary" %>
-                </li>
-                <li class="d-flex mr-4">
-                  <%= link_to "ゲーム一覧", games_path, class: "btn btn-outline-secondary" %>
-                </li>
-                <li class="d-flex mr-4">
-                  <%= link_to notifications_path, class: "btn btn-outline-secondary" do %>
-                    <% if current_user.notifications.where(checked: false).exists? %>
-                      <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #f2ee7d;"></i>
-                    <% else %>
-                      <i class="fa-sharp fa-solid fa-bell"></i>
-                    <% end %>
-                    通知一覧
+      <a class="navbar-brand" href="/" ><span>GAME FINDER</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+            <li class="text-right mr-1">
+              <%= link_to "Profile", user_path(current_user), class: "nav-link text-light" %>
+            </li>
+            <li class="text-right mr-1">
+              <%= link_to "Games", games_path, class: "nav-link text-light" %>
+            </li>
+            <% if current_user.nickname != 'ゲスト' %>
+              <li class="text-right mr-1">
+                <%= link_to notifications_path, class: "nav-link text-light" do %>
+                  <% if current_user.notifications.where(checked: false).exists? %>
+                    <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #f2ee7d;"></i>
+                  <% else %>
+                    <i class="fa-sharp fa-solid fa-bell"></i>
                   <% end %>
-                </li>
-                <li class="d-flex">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" %>
-                </li>
+                  Notification
+                <% end %>
+              </li>
+            <% end %>
+            <li class="text-right mr-1">
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link text-light" %>
+            </li>
 
-              <% elsif admin_signed_in? %>
-                <li class="d-flex mr-4">
-                  <%= link_to "ゲーム一覧", games_path, class: "btn btn-outline-secondary" %>
-                </li>
-                <li class="d-flex mr-4">
-                  <%= link_to 'ジャンル', admin_genres_path, class: "btn btn-outline-secondary" %>
-                </li>
-                <li class="d-flex">
-                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary" %>
-                </li>
+          <% elsif admin_signed_in? %>
+            <li class="text-right mr-1">
+              <%= link_to "Games", games_path, class: "nav-link text-light" %>
+            </li>
+            <li class="text-right mr-1">
+              <%= link_to 'Genre', admin_genres_path, class: "nav-link text-light" %>
+            </li>
+            <li class="text-right mr-1">
+              <%= link_to "Log out", destroy_admin_session_path, method: :delete, class: "nav-link text-light" %>
+            </li>
 
-              <% else %>
-                <li class="d-flex mr-4">
-                  <%= link_to "About", about_path, class: "btn btn-outline-secondary" %>
-                </li>
-                <li class="d-flex mr-4">
-                  <%= link_to "サインアップ", new_user_registration_path, class: "btn btn-outline-secondary" %>
-                </li>
-                <li class="d-flex">
-                  <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-secondary" %>
-                </li>
-              <% end %>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="mt-3 text-right">
+          <% else %>
+            <li class="text-right mr-1">
+              <%= link_to "About", about_path, class: "nav-link text-light" %>
+            </li>
+            <li class="text-right mr-1">
+              <%= link_to "Sign up", new_user_registration_path, class: "nav-link text-light" %>
+            </li>
+            <li class="text-right mr-1">
+              <%= link_to "Sign in", new_user_session_path, class: "nav-link text-light" %>
+            </li>
+          <% end %>
+          <% if user_signed_in? or admin_signed_in? %>
+            <div class="d-flex justify-content-end align-items-center mr-1">
               <%= form_with url: search_path, method: :get, local: true do |f| %>
-                <%= f.text_field :content, placeholder: "ゲーム名" %>
-                <%= f.submit "検索" %>
+                <%= f.text_field :content, placeholder: "Game name" %>
+                <%= f.submit "Search" %>
               <% end %>
             </div>
-          </div>
-        </div>
+          <% end %>
+        </ul>
       </div>
+
+
     </div>
-  </div>
+  </nav>
 </header>

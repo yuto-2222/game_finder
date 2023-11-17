@@ -1,10 +1,10 @@
 <table class=" table border border-dark", style="width:80%;">
   <th class="text-center align-middle border-bottom border-dark">
-    info
+    Information
   </th>
 	<% if user.is_active == false %>
 		<tr>
-			<td>退会済みユーザー</td>
+			<td>Withdrawal User</td>
 		</tr>
 	<% end %>
 	<tr>
@@ -14,13 +14,13 @@
 	</tr>
 	<tr>
 		<td class="align-middle">
-			<p>ニックネーム</p>
+			<p>Nickname</p>
 			<div class="text-center"><%= user.nickname %></div>
 		</td>
 	</tr>
 	<tr>
 		<td class="align-middle">
-			<p>イントロダクション</p>
+			<p>Introduction</p>
 			<div class="text-center"><%= user.introduction %></div>
 		</td>
 	</tr>
@@ -28,7 +28,7 @@
 		<% if user.nickname != 'ゲスト' %>
 			<tr>
 				<td class="text-center align-middle">
-					<div><%= link_to '編集', edit_user_path(params[:id]) %></div>
+					<div><%= link_to 'Edit', edit_user_path(params[:id]) %></div>
 				</td>
 			</tr>
 		<% end %>

@@ -4,6 +4,6 @@
     があなたの
     <%= link_to '投稿', game_review_path(notification.subject.review.game, notification.subject.review) %>
     を参考にしました
-    <%= " (#{time_ago_in_words(notification.created_at)}前)" %>
+    <%= " (#{time_ago_in_words(notification.created_at)} ago)" %>
   </div>
 <% end %>

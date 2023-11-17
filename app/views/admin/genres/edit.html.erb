@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <p class="font-weight-bold bg-secondary text-light mx-auto my-4 h4">
-      ジャンル編集
+    <p class="font-weight-bold bg-secondary text-light mx-auto my-4 p-1 h4">
+      Genre Editing
     </p>
   </div>
 
@@ -10,13 +10,13 @@
     <%= render 'layouts/errors', obj: @genre %>
     <%= form_with model: @genre, url: admin_genre_path, local:true do |f| %>
       <div class="form-group d-flex justify-content-between align-items-center text-nowrap my-3">
-        <%= f.label :ジャンル名, class: "font-weight-bold mx-2" %>
-        <%= f.text_field :name, placeholder: "ジャンル名を入力", class: "form-control name mx-4" %>
-        <%= f.submit :変更を保存, class: 'btn btn-success mx-2' %>
+        <%= f.label :Genre, class: "font-weight-bold mr-2" %>
+        <%= f.text_field :name, placeholder: "Type genre name", class: "form-control name mx-4" %>
+        <%= f.submit :Save, class: 'btn btn-success ml-2' %>
       </div>
     <% end %>
     <div class="text-center">
-      <%= link_to 'ジャンル一覧へ', admin_genres_path %>
+      <%= link_to '< Genres List >', admin_genres_path %>
     </div>
   </div>
 </div>

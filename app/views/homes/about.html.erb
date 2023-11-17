@@ -1,7 +1,7 @@
 <div>
-	<p class="text-center mt-5 mb-5 h1">About</p>
+	<p class="text-center  mb-5 h1">About</p>
 	<p class="text-center h5">
-		ゲーム好きが集まるサイトです。</br>
+		<%= link_to 'ゲーム好き', admin_session_path, class: "text-dark" %>が集まるサイトです。</br>
 		プレイしたゲームのレビューをしたり、</br>
 		ゲームを探すことができます。</br>
 		レビューをしたユーザーの過去のゲーム歴や、</br>
@@ -12,13 +12,12 @@
 <% if user_signed_in? %>
 <% elsif admin_signed_in? %>
 <% else %>
-	<div class="text-center mt-4 mb-2">
-		<%= link_to "サインアップ(お試しもできるよ)", new_user_registration_path, class: "btn btn-outline-secondary" %>
-	</div>
-	<div class="text-center mb-2">
-		<%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-secondary" %>
-	</div>
-	<div class="text-center">
-		<%= link_to '管理者ログイン', admin_session_path, class: "btn btn-outline-secondary" %>
+	<div class="text-center mt-5">
+		<span class="mr-2">
+			<%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-secondary" %>
+		</span>
+		<span class="ml-2">
+			<%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-secondary" %>
+		</span>
 	</div>
 <% end %>

@@ -1,28 +1,34 @@
 <%= form_with model: game do |f| %>
   <div class="form-group text-nowrap mt-3 mb-3">
-    <%= f.label :image, 'ゲームイメージ(スルーしてもOK)' %></br>
+    <%= f.label :image, 'Game image' %></br>
     <%= f.file_field :image, accept: "image/*", class: "ml-4" %>
+    <small class="form-text text-muted ml-4">
+      It's OK without this.
+    </small>
   </div>
   <div class="form-group text-nowrap mt-3 mb-3">
-    <%= f.label :name, 'ゲーム名', class: "mr-3" %></br>
-    <%= f.text_field :name, class: "ml-4" %>
+    <%= f.label :name, 'Game name' %></br>
+    <%= f.text_field :name, class: "form-control ml-4" %>
+    <small class="form-text text-muted ml-4">
+      Please give a game name that everyone can understand.
+    </small>
   </div>
 
   <div class="form-group text-nowrap mt-3 mb-3">
-    <%= f.label :genre_id, 'ジャンル', class: "mr-3" %></br>
+    <%= f.label :genre_id, 'Genre' %></br>
     <div class="ml-4">
       <%= f.select :genre_id, options_for_select(@genres.map { |g| [g.name, g.id] }, game.genre_id), {class: "form-control"} %>
     </div>
   </div>
 
   <div class="form-group text-nowrap mt-3 mb-3">
-    <%= f.label :release_date, '発売日', class: "mr-3" %></br>
+    <%= f.label :release_date, 'Release date' %></br>
     <div class="ml-4">
       <%= raw sprintf(f.date_select(:release_date, start_year: 1975, use_month_numbers: true, date_separator: '%s'), '年', '月')+ '日' %>
     </div>
   </div>
 
-  <div class="text-center">
+  <div class="text-center p-1">
     <%= f.submit %>
   </div>
 <% end %>

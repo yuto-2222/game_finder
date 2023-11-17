@@ -9,15 +9,15 @@
 
 			<div class='col-9 mt-5'>
 	    	<div class="my-3">
-	    		<span class="h2 mr-2">レビュー一覧</span> <span>(全<%= @user.reviews.count %>件)</span>
+	    		<span class="h2 mr-2">Reviews List</span> <span>(全<%= @user.reviews.count %>件)</span>
 					<table class='table table-hover mt-3'>
 						<thead class="bg-light">
 							<tr>
-								<th>ゲーム名</th>
-								<th>レビュー</th>
+								<th>Game name</th>
+								<th>Review</th>
 								<!--<th>レーティング</th>-->
-								<th>役立った</th>
-								<th>コメント数</th>
+								<th>Useful</th>
+								<th>Comments</th>
 							</tr>
 						</thead>
 
@@ -46,9 +46,8 @@
 		</div>
 	<% else %>
 	  <div class="text-center mt-4 mb-2">
-			ゲストの方は
-			<%= link_to "こちら", users_guest_sign_out_path, method: :post %>
-		  からサインアップできます
+			Sign up
+			<%= link_to "here", users_guest_sign_out_path, method: :post %>
 		</div>
 		<p class="text-center mt-5 mb-5 h2">
 			お試しいただき</br>
