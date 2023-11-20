@@ -38,14 +38,14 @@
     <% if current_user.nickname != 'ゲスト' %>
       <tr>
         <td class="text-center">
-          <%= link_to 'Edit', edit_game_path(game) %>
+          <%= link_to 'Edit', edit_game_path(game), class: 'text-dark' %>
         </td>
       </tr>
     <% end %>
   <% elsif admin_signed_in? %>
     <tr>
       <td class="text-center">
-        <%= link_to 'Edit', edit_game_path(game) %>
+        <%= link_to 'Edit', edit_game_path(game), class: 'text-dark' %>
       </td>
     </tr>
   <% end %>

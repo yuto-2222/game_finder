@@ -20,23 +20,23 @@
 				<div class="ml-2">
 					<% if user_signed_in? %>
 						<% if current_user.nickname != 'ゲスト' %>
-							<%= link_to 'Create Game', new_game_path %>
+							<%= link_to 'Create Game', new_game_path, class: 'text-dark' %>
 						<% end %>
 					<% elsif admin_signed_in? %>
-						<%= link_to 'Create Game', new_game_path %>
+						<%= link_to 'Create Game', new_game_path, class: 'text-dark' %>
 					<% end %>
 				</div>
 			</div>
 			<div>
-				<%= link_to 'New', games_path(latest: "true") %> |
-				<%= link_to 'Old', games_path(earliest: "true") %> |
-				<%= link_to 'Popular', games_path(popular: "true") %>
+				<%= link_to 'New', games_path(latest: "true"), class: 'text-dark' %> |
+				<%= link_to 'Old', games_path(earliest: "true"), class: 'text-dark' %> |
+				<%= link_to 'Popular', games_path(popular: "true"), class: 'text-dark' %>
 			</div>
 			<%= render 'index', games: @games %>
 
 			<div class="d-flex justify-content-center">
 				<p>
-					<%= paginate @games, theme: 'bootstrap-5' %>
+					<%= paginate @games, theme: 'bootstrap-5', class: 'text-dark' %>
 				</p>
 			</div>
 		</div>

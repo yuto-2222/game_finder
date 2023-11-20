@@ -28,7 +28,7 @@
 		<% if user.nickname != 'ゲスト' %>
 			<tr>
 				<td class="text-center align-middle">
-					<div><%= link_to 'Edit', edit_user_path(params[:id]) %></div>
+					<div><%= link_to 'Edit', edit_user_path(params[:id]), class: 'text-dark' %></div>
 				</td>
 			</tr>
 		<% end %>

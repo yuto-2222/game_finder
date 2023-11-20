@@ -24,7 +24,7 @@
   <div class="form-group text-nowrap mt-3 mb-3">
     <%= f.label :release_date, 'Release date' %></br>
     <div class="ml-4">
-      <%= raw sprintf(f.date_select(:release_date, start_year: 1975, use_month_numbers: true, date_separator: '%s'), '年', '月')+ '日' %>
+      <%= raw sprintf(f.date_select(:release_date, start_year: 1975, end_year: Time.now.year, use_month_numbers: true, date_separator: '%s'), '年', '月')+ '日' %>
     </div>
   </div>
 

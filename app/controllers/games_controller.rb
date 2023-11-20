@@ -33,10 +33,8 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
 
     if @game.save
-      flash[:success] = "新しいゲームが追加されました！"
       redirect_to game_reviews_path(@game)
     else
-      flash.now[:danger] = "ゲームの追加に失敗しました。"
       @genres = Genre.all
       render 'new'
     end
@@ -45,10 +43,8 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1 or /games/1.json
   def update
     if @game.update(game_params)
-      flash[:success] = "ゲーム詳細がアップデートされました！"
       redirect_to game_reviews_path(@game)
     else
-      flash.now[:danger] = "ゲーム内容の編集ができませんでした。"
       @genres = Genre.all
       render 'edit'
     end
@@ -70,7 +66,7 @@ class GamesController < ApplicationController
   def user_or_admin?
     if user_signed_in? or admin_signed_in?
     else
-      redirect_to root_path, notice: 'ログインが必要です'
+      redirect_to root_path, notice: 'You need to sign in.'
     end
   end
 

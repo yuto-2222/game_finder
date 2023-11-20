@@ -24,11 +24,9 @@ class UsersController < ApplicationController
   def cancel
     @user = current_user
     if @user.update(is_active: false)
-      flash.now[:success] = 'Success'
       reset_session
       redirect_to root_path
     else
-      flash.now[:danger] = "Failed"
       render :show
     end
   end

@@ -20,17 +20,17 @@
     		<div class="ml-2">
 					<% if user_signed_in? %>
 						<% if current_user.nickname != 'ゲスト' %>
-							<%= link_to 'Add game', new_game_path %>
+							<%= link_to 'Add game', new_game_path, class: 'text-dark' %>
 						<% end %>
 					<% elsif admin_signed_in? %>
-						<%= link_to 'Add game', new_game_path %>
+						<%= link_to 'Add game', new_game_path, class: 'text-dark' %>
 					<% end %>
 				</div>
     	</div>
     	<div>
-	    	<%= link_to 'New', genre_search_path(genre_id: @genre.id, latest: "true") %> |
-				<%= link_to 'Old', genre_search_path(genre_id: @genre.id, earliest: "true") %> |
-				<%= link_to 'Popular', genre_search_path(genre_id: @genre.id, popular: "true") %>
+	    	<%= link_to 'New', genre_search_path(genre_id: @genre.id, latest: "true"), class: 'text-dark' %> |
+				<%= link_to 'Old', genre_search_path(genre_id: @genre.id, earliest: "true"), class: 'text-dark' %> |
+				<%= link_to 'Popular', genre_search_path(genre_id: @genre.id, popular: "true"), class: 'text-dark' %>
     	</div>
     	<%= render 'games/index', games: @games %>
 

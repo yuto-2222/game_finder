@@ -24,17 +24,17 @@
 						<tbody>
 							<% @reviews.each do |review| %>
 								<tr>
-									<td class="text-center align-middle text-dark">
-										<%= link_to review.game.name, game_reviews_path(review.game) %>
+									<td class="text-center align-middle">
+										<%= link_to review.game.name, game_reviews_path(review.game), class: 'text-dark' %>
 									</td>
-									<td class="text-center align-middle text-dark">
-										<%= link_to review.content, game_review_path(review.game, review) %>
+									<td class="text-center align-middle">
+										<%= link_to review.content, game_review_path(review.game, review), class: 'text-dark' %>
 									</td>
 									<!--<td class="text-center align-middle text-dark">rating</td>-->
-									<td class="text-center align-middle text-dark">
+									<td class="text-center align-middle">
 										<%= review.usefuls.count %>
 									</td>
-									<td class="text-center align-middle text-dark">
+									<td class="text-center align-middle">
 										<%= review.comments.count %>
 									</td>
 								</tr>

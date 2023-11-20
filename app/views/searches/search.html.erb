@@ -23,17 +23,17 @@
 	    		<div class="ml-2">
 						<% if user_signed_in? %>
 							<% if current_user.nickname != 'ゲスト' %>
-								<%= link_to 'Add game', new_game_path %>
+								<%= link_to 'Add game', new_game_path, class: 'text-dark' %>
 							<% end %>
 						<% elsif admin_signed_in? %>
-							<%= link_to 'Add game', new_game_path %>
+							<%= link_to 'Add game', new_game_path, class: 'text-dark' %>
 						<% end %>
 					</div>
 	    	</div>
     		<div>
-	    		<%= link_to '新しい順', search_path(content: params[:content], latest: "true") %> |
-					<%= link_to '古い順', search_path(content: params[:content], earliest: "true") %> |
-					<%= link_to '人気順', search_path(content: params[:content], popular: "true") %>
+	    		<%= link_to 'New', search_path(content: params[:content], latest: "true"), class: 'text-dark' %> |
+					<%= link_to 'Old', search_path(content: params[:content], earliest: "true"), class: 'text-dark' %> |
+					<%= link_to 'Popular', search_path(content: params[:content], popular: "true"), class: 'text-dark' %>
 
     		<%= render 'games/index', games: @games %>
 

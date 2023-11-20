@@ -31,10 +31,8 @@ class ReviewsController < ApplicationController
     @review.game_id = @game.id
     @review.user_id = current_user.id
     if @review.save
-      flash[:success] = "新しいレビューが追加されました！"
       redirect_to game_reviews_path(@game)
     else
-      flash.now[:danger] = "レビューの追加に失敗しました。"
       render 'new'
     end
   end
