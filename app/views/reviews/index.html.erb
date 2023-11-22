@@ -8,13 +8,13 @@
 	  <% end %>
   <% end %>
   <div class='row'>
-    <div class='col-3 mt-5'>
+    <div class='col-6 col-md-3 mt-5'>
 			<div>
 				<%= render 'games/info', game: @game %>
 			</div>
 		</div>
 
-		<div class='col-9 mt-5'>
+		<div class='col-md-9 mt-5'>
     	<div class="my-3">
     		<span class="h2 mr-2">Reviews List</span> <span>(全<%= @game.reviews.count %>件)</span>
 				<% if user_signed_in? %>

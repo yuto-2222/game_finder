@@ -6,6 +6,7 @@ class SearchesController < ApplicationController
 		genre_id = params[:genre_id]
 		@genre = Genre.find(genre_id)
 		games = Game.where(genre_id: genre_id)
+		@genre_games = games.all
 		if params[:latest] == "true"
 			@games = games.latest.page(params[:page]).per(8)
 		elsif params[:earliest] == "true"
@@ -19,6 +20,7 @@ class SearchesController < ApplicationController
 
 	def search
 		games = Game.where('name LIKE ?', "%#{params[:content]}%")
+		@search_games = games.all
 		if params[:latest] == "true"
 			@games = games.latest.page(params[:page]).per(8)
 		elsif params[:earliest] == "true"

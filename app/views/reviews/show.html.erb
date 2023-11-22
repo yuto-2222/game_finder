@@ -8,12 +8,12 @@
 	  <% end %>
   <% end %>
   <div class='row'>
-    <div class='col-3 mt-5'>
+    <div class='col-6 col-md-3 mt-5'>
 			<div>
 				<%= render 'games/info', game: @game %>
 			</div>
 		</div>
-		<div class='col-9 mt-5'>
+		<div class='col-md-9 mt-5'>
     	<div class="my-3">
     		<span class="h2 mr-2">Comments List</span> <span>(全<%= @review.comments.count %>件)</span>
 				<div class="ml-2">
@@ -37,7 +37,9 @@
   				<tbody>
   				  <tr>
   				    <td>
-  				      <%= image_tag @review.user.get_profile_image, size: "100x100" %>
+  				      <%= link_to user_path(@review.user.id) do %>
+  				        <%= image_tag @review.user.get_profile_image, size: "100x100" %>
+  				      <% end %>
   				    </td>
   				    <td class="text-center align-middle">
   				      <%= link_to @review.user.nickname, user_path(@review.user.id), class: 'text-dark' %>

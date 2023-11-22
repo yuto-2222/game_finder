@@ -8,7 +8,7 @@
 	  <% end %>
   <% end %>
   <div class='row'>
-    <div class='col-md-3 mt-5'>
+    <div class='col-6 col-md-3 mt-5'>
 			<div>
 				<%= render 'layouts/genre', genres: @genres %>
 			</div>
@@ -19,7 +19,7 @@
   			<p class="font-weight-bold d-flex justify-content-center">「<%= params[:content] %>」で検索したゲームは見つかりませんでした。</p>
 			<% else %>
 	    	<div class="my-3">
-	    		<span class="h2 mr-2">「<%= params[:content] %>」Search List</span> <span>(全<%= @games.count %>件)</span>
+	    		<span class="h2 mr-2">「<%= params[:content] %>」Search List</span> <span>(全<%= @search_games.count %>件)</span>
 	    		<div class="ml-2">
 						<% if user_signed_in? %>
 							<% if current_user.nickname != 'ゲスト' %>

@@ -13,6 +13,7 @@
 					<table class='table table-hover mt-3'>
 						<thead class="bg-light">
 							<tr>
+								<th></th>
 								<th>Game name</th>
 								<th>Review</th>
 								<!--<th>レーティング</th>-->
@@ -24,6 +25,9 @@
 						<tbody>
 							<% @reviews.each do |review| %>
 								<tr>
+									<td class="text-center align-middle">
+										<%= image_tag review.game.get_image, size: "90x100" %>
+									</td>
 									<td class="text-center align-middle">
 										<%= link_to review.game.name, game_reviews_path(review.game), class: 'text-dark' %>
 									</td>
