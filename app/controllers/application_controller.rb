@@ -17,11 +17,12 @@ class ApplicationController < ActionController::Base
       root_path
     end
   end
-
+  
+  # sign inしていないとrootに
   def user_or_admin?
     if user_signed_in? or admin_signed_in?
     else
-      flash[:danger] = 'ログインが必要です'
+      flash[:notice] = 'Need to sign in !'
       redirect_to root_path
     end
   end

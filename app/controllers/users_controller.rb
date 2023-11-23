@@ -5,7 +5,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @reviews = Review.where(user_id: @user.id).page(params[:page]).per(8)
+    @reviews = Review.where(user_id: @user.id).order(useful_count: :desc).page(params[:page]).per(5)
+    @comments = Comment.where(user_id: @user.id).order(created_at: :desc)
   end
 
   def edit
@@ -34,8 +35,10 @@ class UsersController < ApplicationController
 
   private
 
+  # 本人かadminのみ
   def ensure_correct_user
     @user = User.find(params[:id])
+    ## 違う場合はそのuserのProfileへ
     unless @user == current_user or admin_signed_in?
       redirect_to user_path(current_user)
     end

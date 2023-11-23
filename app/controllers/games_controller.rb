@@ -4,10 +4,14 @@ class GamesController < ApplicationController
 
   # GET /games or /games.json
   def index
+    # 並び替え方法で分岐
+    ## latestで新しい順
     if params[:latest] == "true"
       @games = Game.latest.page(params[:page]).per(8)
+    ## earliestで古い順
     elsif params[:earliest] == "true"
       @games = Game.earliest.page(params[:page]).per(8)
+    ## popularで人気順
     elsif params[:popular] == "true"
       @games = Game.popular.page(params[:page]).per(8)
     else
@@ -33,6 +37,7 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
 
     if @game.save
+      flash[:notice] = 'Success !'
       redirect_to game_reviews_path(@game)
     else
       @genres = Genre.all
@@ -61,13 +66,6 @@ class GamesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_game
     @game = Game.find(params[:id])
-  end
-
-  def user_or_admin?
-    if user_signed_in? or admin_signed_in?
-    else
-      redirect_to root_path, notice: 'You need to sign in.'
-    end
   end
 
   # Only allow a list of trusted parameters through.

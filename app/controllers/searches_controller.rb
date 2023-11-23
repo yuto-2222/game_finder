@@ -7,10 +7,14 @@ class SearchesController < ApplicationController
 		@genre = Genre.find(genre_id)
 		games = Game.where(genre_id: genre_id)
 		@genre_games = games.all
+		# 並び替え方法で分岐
+		## latestで新しい順
 		if params[:latest] == "true"
 			@games = games.latest.page(params[:page]).per(8)
+		## earliestで古い順
 		elsif params[:earliest] == "true"
 			@games = games.earliest.page(params[:page]).per(8)
+		## popularで人気順
 		elsif params[:popular] == "true"
 			@games = games.popular.page(params[:page]).per(8)
 		else
@@ -21,10 +25,14 @@ class SearchesController < ApplicationController
 	def search
 		games = Game.where('name LIKE ?', "%#{params[:content]}%")
 		@search_games = games.all
+		# 並び替え方法で分岐
+		## latestで新しい順
 		if params[:latest] == "true"
 			@games = games.latest.page(params[:page]).per(8)
+		## earliestで古い順
 		elsif params[:earliest] == "true"
 			@games = games.earliest.page(params[:page]).per(8)
+		## popularで人気順
 		elsif params[:popular] == "true"
 			@games = games.popular.page(params[:page]).per(8)
 		else

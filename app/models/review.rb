@@ -1,4 +1,5 @@
 class Review < ApplicationRecord
+  
 	# バリデーション
   validates :content, presence: true
 
@@ -9,7 +10,8 @@ class Review < ApplicationRecord
   has_many :usefuls, dependent: :destroy
   
   has_one :notification, as: :subject, dependent: :destroy
-
+  
+  # userがreviewusefulしているかどうか確認
   def was_useful_by?(user)
     usefuls.exists?(user_id: user.id)
   end

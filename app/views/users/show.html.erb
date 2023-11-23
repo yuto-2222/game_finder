@@ -1,13 +1,13 @@
 <div class='container'>
   <% if @user.nickname != 'ゲスト' %>
   	<div class='row'>
-	    <div class='col-3 mt-5'>
+	    <div class='col-6 col-md-3 mt-5'>
 				<div>
 					<%= render 'info', user: @user %>
 				</div>
 			</div>
 
-			<div class='col-9 mt-5'>
+			<div class='col-md-9 mt-5'>
 	    	<div class="my-3">
 	    		<span class="h2 mr-2">Reviews List</span> <span>(全<%= @user.reviews.count %>件)</span>
 					<table class='table table-hover mt-3'>
@@ -26,7 +26,9 @@
 							<% @reviews.each do |review| %>
 								<tr>
 									<td class="text-center align-middle">
-										<%= image_tag review.game.get_image, size: "90x100" %>
+										<%= link_to game_reviews_path(review.game) do %>
+											<%= image_tag review.game.get_image, size: "90x100" %>
+										<% end %>
 									</td>
 									<td class="text-center align-middle">
 										<%= link_to review.game.name, game_reviews_path(review.game), class: 'text-dark' %>
@@ -40,6 +42,51 @@
 									</td>
 									<td class="text-center align-middle">
 										<%= review.comments.count %>
+									</td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+
+					<div class="d-flex justify-content-center">
+						<p>
+							<%= paginate @reviews, theme: 'bootstrap-5' %>
+						</p>
+					</div>
+				</div>
+
+				<div class="my-3">
+	    		<span class="h2 mr-2">Comments List</span> <span>(全<%= @user.comments.count %>件)</span>
+					<table class='table table-hover mt-3'>
+						<thead class="bg-light">
+							<tr>
+								<th></th>
+								<th>Game Name</th>
+								<th>Review User</th>
+								<th>Review</th>
+								<th>Comment</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<% @comments.each do |comment| %>
+								<tr>
+									<td class="text-center align-middle">
+										<%= link_to game_reviews_path(comment.review.game) do %>
+											<%= image_tag comment.review.game.get_image, size: "90x100" %>
+										<% end %>
+									</td>
+									<td class="text-center align-middle">
+										<%= link_to comment.review.game.name, game_reviews_path(comment.review.game), class: 'text-dark' %>
+									</td>
+									<td class="text-center align-middle">
+										<%= link_to comment.review.user.nickname, user_path(comment.review.user), class: 'text-dark' %>
+									</td>
+									<td class="text-center align-middle">
+										<%= link_to comment.review.content, game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
+									</td>
+									<td class="text-center align-middle">
+										<%= link_to comment.content, game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
 									</td>
 								</tr>
 							<% end %>

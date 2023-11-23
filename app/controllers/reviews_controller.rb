@@ -6,7 +6,8 @@ class ReviewsController < ApplicationController
   def index
     game_id = params[:game_id]
     @game = Game.find(game_id)
-    @reviews = @game.reviews.page(params[:page]).per(8)
+    # デフォルトでuseful多い順
+    @reviews = @game.reviews.order(useful_count: :desc).page(params[:page]).per(8)
 
   end
 
@@ -14,7 +15,8 @@ class ReviewsController < ApplicationController
   def show
     @game = Game.find(params[:game_id])
     @comment = Comment.new
-    @comments = @review.comments.page(params[:page]).per(8)
+    # デフォルトで新しい順
+    @comments = @review.comments.order(created_at: :desc).page(params[:page]).per(8)
   end
 
   # GET /reviews/new
@@ -31,6 +33,7 @@ class ReviewsController < ApplicationController
     @review.game_id = @game.id
     @review.user_id = current_user.id
     if @review.save
+      flash[:notice] = 'Success !'
       redirect_to game_reviews_path(@game)
     else
       render 'new'

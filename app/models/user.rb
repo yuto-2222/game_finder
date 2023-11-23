@@ -18,7 +18,8 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
 
   has_one_attached :profile_image
-
+  
+  # ゲストアカウントを探し、無ければ作成
   def self.guest
     find_or_create_by!(email: 'guest@guest.com') do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -26,7 +27,8 @@ class User < ApplicationRecord
       # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
     end
   end
-
+  
+  # ProfileImage設定なければデフォルトを表示
   def get_profile_image
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_profile_image.jpg')
