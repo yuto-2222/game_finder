@@ -2,7 +2,7 @@
 	<thead class="bg-light">
 		<tr>
 			<th></th>
-			<th>Game name</th>
+			<th class="text-nowrap">Game Name</th>
 			<th>Release date</th>
 			<th>Played</th>
 			<th>Reviews</th>
@@ -15,21 +15,28 @@
 					data-action="click->href#toHref"
 					data-href="<%= game_reviews_path(game) %>"
 					style="cursor: pointer;">
-
 				<td>
-					<%= image_tag game.get_image, size: "90x100" %>
+					<%= image_tag game.get_image, size: "90x100", alt: 'game image' %>
 				</td>
-				<td class="text-center align-middle text-dark">
-					<%= game.name %>
+				<td class="align-middle text-dark">
+					<div class="ml-3">
+						<%= game.name %>
+					</div>
 				</td>
-				<td class="text-center align-middle text-dark">
-					<%= game.release_date.strftime('%Y年%m月%d日') %>
+				<td class="align-middle text-dark">
+					<div class="ml-3">
+						<%= game.release_date.strftime('%Y年%m月%d日') %>
+					</div>
 				</td>
-				<td class="text-center align-middle text-dark">
-					<%= game.play_games.count %>
+				<td class="align-middle text-dark">
+					<div class="ml-3">
+						<%= game.play_games.count %>
+					</div>
 				</td>
-				<td class="text-center align-middle text-dark">
-					<%= game.reviews.count %>
+				<td class="align-middle text-dark">
+					<div class="ml-3">
+						<%= game.reviews.count %>
+					</div>
 				</td>
 			</tr>
 		<% end %>

@@ -14,9 +14,8 @@
 						<thead class="bg-light">
 							<tr>
 								<th></th>
-								<th>Game Name</th>
+								<th class="text-nowrap">Game Name</th>
 								<th>Review</th>
-								<th></th><th></th>
 								<th>Useful</th>
 								<th>Comments</th>
 							</tr>
@@ -25,22 +24,30 @@
 						<tbody>
 							<% @reviews.each do |review| %>
 								<tr>
-									<td class="text-center align-middle">
+									<td class="align-middle">
 										<%= link_to game_reviews_path(review.game) do %>
-											<%= image_tag review.game.get_image, size: "90x100" %>
+											<%= image_tag review.game.get_image, size: "90x100", alt: 'game image' %>
 										<% end %>
 									</td>
-									<td class="text-center align-middle">
-										<%= link_to review.game.name, game_reviews_path(review.game), class: 'text-dark' %>
+									<td class="align-middle">
+										<div class="ml-3">
+											<%= link_to review.game.name, game_reviews_path(review.game), class: 'text-dark' %>
+										</div>
 									</td>
-									<td colspan="3" class="align-middle">
-										<%= link_to safe_join(review.content.split("\n"),tag(:br)), game_review_path(review.game, review), class: 'text-dark' %>
+									<td class="align-middle">
+										<div class="ml-3 table-text">
+											<%= link_to safe_join(review.content.split("\n"),tag(:br)), game_review_path(review.game, review), class: 'text-dark' %>
+										</div>
 									</td>
-									<td class="text-center align-middle">
-										<%= review.usefuls.count %>
+									<td class="align-middle">
+										<div class="ml-3">
+											<%= review.usefuls.count %>
+										</div>
 									</td>
-									<td class="text-center align-middle">
-										<%= review.comments.count %>
+									<td class="align-middle">
+										<div class="ml-3">
+											<%= review.comments.count %>
+										</div>
 									</td>
 								</tr>
 							<% end %>
@@ -60,30 +67,34 @@
 						<thead class="bg-light">
 							<tr>
 								<th></th>
-								<th>Game Name</th>
+								<th class="text-nowrap">Game Name</th>
 								<th>Review</th>
-								<th></th><th></th>
 								<th>Comment</th>
-								<th></th><th></th>
 							</tr>
 						</thead>
 
 						<tbody>
 							<% @comments.each do |comment| %>
 								<tr>
-									<td class="text-center align-middle">
+									<td class="align-middle">
 										<%= link_to game_reviews_path(comment.review.game) do %>
 											<%= image_tag comment.review.game.get_image, size: "90x100" %>
 										<% end %>
 									</td>
-									<td class="text-center align-middle">
-										<%= link_to comment.review.game.name, game_reviews_path(comment.review.game), class: 'text-dark' %>
+									<td class="align-middle">
+										<div class="ml-3">
+											<%= link_to comment.review.game.name, game_reviews_path(comment.review.game), class: 'text-dark' %>
+										</div>
 									</td>
-									<td colspan="3" class="align-middle">
-										<%= link_to safe_join(comment.review.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
+									<td class="align-middle">
+										<div class="ml-3 table-text">
+											<%= link_to safe_join(comment.review.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
+										</div>
 									</td>
-									<td colspan="3" class="align-middle">
-										<%= link_to safe_join(comment.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
+									<td class="align-middle">
+										<div class="ml-3 table-text">
+											<%= link_to safe_join(comment.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
+										</div>
 									</td>
 								</tr>
 							<% end %>
