@@ -1,24 +1,3 @@
-<!--<table class="table table-hover">-->
-<!--	<%# comments.each do |comment| %>-->
-<!--		<tr>-->
-<!--			<td class="text-center align-middle">-->
-<!--				<%#= link_to user_path(comment.user.id), class: 'text-dark' do %>-->
-<!--				  <%#= image_tag comment.user.get_profile_image, size: "60x60" %></br>-->
-<!--				  <%#= comment.user.nickname %>-->
-<!--		  	<%# end %>-->
-<!--		  </td>-->
-<!--		  <td class="text-center align-middle text-dark">-->
-<!--		  	<%#= comment.content %>-->
-<!--		  </td>-->
-<!--		  <%# if comment.user == current_user or admin_signed_in? %>-->
-<!--			  <td class="text-center align-middle text-dark">-->
-<!--		      <%#= button_to "Delete", game_review_comment_path(comment.review.game, comment.review, comment),-->
-<!--		      		method: :delete, data: { confirm: 'Are you sure you want to delete this comment ?' }, class: "btn btn-dark ml-2" %>-->
-<!--		    </td>-->
-<!--	    <%# end %>-->
-<!--		</tr>-->
-<!--	<%# end %>-->
-<!--</table>-->
 <% comments.each do |comment| %>
 	<div class="border-top d-flex align-items-center">
 		<div class="text-center m-3">
@@ -27,8 +6,9 @@
 				<%= comment.user.nickname %>
 			<% end %>
 		</div>
-		<div>
-			<%= comment.content %>
+
+		<div class="col-9">
+			<%= safe_join(comment.content.split("\n"),tag(:br)) %>
 		</div>
 
 		<% if comment.user == current_user or admin_signed_in? %>

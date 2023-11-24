@@ -1,48 +1,37 @@
-<div class="container">
-	<div class="row">
-		<div class="col">
-			<table class='table table-hover'>
-				<thead class="bg-light">
-					<tr>
-						<th></th>
-						<th>Game name</th>
-						<th>Release date</th>
-						<th>Played</th>
-						<!--<th>レーティング</th>-->
-						<th>Reviews</th>
-					</tr>
-				</thead>
+<table class='table table-hover'>
+	<thead class="bg-light">
+		<tr>
+			<th></th>
+			<th>Game name</th>
+			<th>Release date</th>
+			<th>Played</th>
+			<th>Reviews</th>
+		</tr>
+	</thead>
 
-				<tbody>
-					<% games.each do |game| %>
-						<tr data-controller="href"
-								data-action="click->href#toHref"
-								data-href="<%= game_reviews_path(game) %>"
-								style="cursor: pointer;">
+	<tbody>
+		<% games.each do |game| %>
+			<tr data-controller="href"
+					data-action="click->href#toHref"
+					data-href="<%= game_reviews_path(game) %>"
+					style="cursor: pointer;">
 
-							<td>
-								<%= image_tag game.get_image, size: "90x100" %>
-							</td>
-							<td class="text-center align-middle text-dark">
-								<%= game.name %>
-							</td>
-							<td class="text-center align-middle text-dark">
-								<%= game.release_date.strftime('%Y年%m月%d日') %>
-							</td>
-							<td class="text-center align-middle text-dark">
-								<%= game.play_games.count %>
-							</td>
-							<!--<td class="text-center text-dark">-->
-							<!--	rating-->
-							<!--</td>-->
-							<td class="text-center align-middle text-dark">
-								<%= game.reviews.count %>
-							</td>
-
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
+				<td>
+					<%= image_tag game.get_image, size: "90x100" %>
+				</td>
+				<td class="text-center align-middle text-dark">
+					<%= game.name %>
+				</td>
+				<td class="text-center align-middle text-dark">
+					<%= game.release_date.strftime('%Y年%m月%d日') %>
+				</td>
+				<td class="text-center align-middle text-dark">
+					<%= game.play_games.count %>
+				</td>
+				<td class="text-center align-middle text-dark">
+					<%= game.reviews.count %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

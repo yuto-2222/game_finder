@@ -14,9 +14,9 @@
 						<thead class="bg-light">
 							<tr>
 								<th></th>
-								<th>Game name</th>
+								<th>Game Name</th>
 								<th>Review</th>
-								<!--<th>レーティング</th>-->
+								<th></th><th></th>
 								<th>Useful</th>
 								<th>Comments</th>
 							</tr>
@@ -33,10 +33,9 @@
 									<td class="text-center align-middle">
 										<%= link_to review.game.name, game_reviews_path(review.game), class: 'text-dark' %>
 									</td>
-									<td class="text-center align-middle">
-										<%= link_to review.content, game_review_path(review.game, review), class: 'text-dark' %>
+									<td colspan="3" class="align-middle">
+										<%= link_to safe_join(review.content.split("\n"),tag(:br)), game_review_path(review.game, review), class: 'text-dark' %>
 									</td>
-									<!--<td class="text-center align-middle text-dark">rating</td>-->
 									<td class="text-center align-middle">
 										<%= review.usefuls.count %>
 									</td>
@@ -62,9 +61,10 @@
 							<tr>
 								<th></th>
 								<th>Game Name</th>
-								<th>Review User</th>
 								<th>Review</th>
+								<th></th><th></th>
 								<th>Comment</th>
+								<th></th><th></th>
 							</tr>
 						</thead>
 
@@ -79,14 +79,11 @@
 									<td class="text-center align-middle">
 										<%= link_to comment.review.game.name, game_reviews_path(comment.review.game), class: 'text-dark' %>
 									</td>
-									<td class="text-center align-middle">
-										<%= link_to comment.review.user.nickname, user_path(comment.review.user), class: 'text-dark' %>
+									<td colspan="3" class="align-middle">
+										<%= link_to safe_join(comment.review.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
 									</td>
-									<td class="text-center align-middle">
-										<%= link_to comment.review.content, game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
-									</td>
-									<td class="text-center align-middle">
-										<%= link_to comment.content, game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
+									<td colspan="3" class="align-middle">
+										<%= link_to safe_join(comment.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
 									</td>
 								</tr>
 							<% end %>
