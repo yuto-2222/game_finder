@@ -27,11 +27,7 @@
 					<% end %>
 				</div>
 			</div>
-			<div>
-				<%= link_to 'New', games_path(latest: "true"), class: 'text-dark' %> |
-				<%= link_to 'Old', games_path(earliest: "true"), class: 'text-dark' %> |
-				<%= link_to 'Popular', games_path(popular: "true"), class: 'text-dark' %>
-			</div>
+
 			<%= render 'index', games: @games %>
 
 			<div class="d-flex justify-content-center">
