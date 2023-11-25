@@ -10,100 +10,113 @@
 			<div class='col-md-9 mt-5'>
 	    	<div class="my-3">
 	    		<span class="h2 mr-2">Reviews List</span><span>(全<%= @user.reviews.count %>件)</span>
+					<% if @reviews.present? %>
+						<table class='table table-hover mt-3'>
+							<thead class="bg-light">
+								<tr>
+									<th></th>
+									<th class="text-nowrap">Game Name</th>
+									<th>Review</th>
+									<th>Useful</th>
+									<th>Comments</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<% @reviews.each do |review| %>
+									<tr>
+										<td class="align-middle">
+											<%= link_to game_reviews_path(review.game) do %>
+												<%= image_tag review.game.get_image, size: "90x100", alt: 'game image' %>
+											<% end %>
+										</td>
+										<td class="align-middle">
+											<div class="ml-3">
+												<%= link_to review.game.name, game_reviews_path(review.game), class: 'text-dark' %>
+											</div>
+										</td>
+										<td class="align-middle">
+											<div class="ml-3 table-text">
+												<%= link_to safe_join(review.content.split("\n"),tag(:br)), game_review_path(review.game, review), class: 'text-dark' %>
+											</div>
+										</td>
+										<td class="align-middle">
+											<div class="ml-3">
+												<%= review.usefuls.count %>
+											</div>
+										</td>
+										<td class="align-middle">
+											<div class="ml-3">
+												<%= review.comments.count %>
+											</div>
+										</td>
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
+
+						<div class="d-flex justify-content-center">
+							<p>
+								<%= paginate @reviews, theme: 'bootstrap-5' %>
+							</p>
+						</div>
+
+					<% else %>
+		        <div class="m-3">
+		          Nothing
+		        </div>
+		      <% end %>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+  			<span class="h2 mr-2">Comments List</span><span>(全<%= @user.comments.count %>件)</span>
+				<% if @comments.present? %>
 					<table class='table table-hover mt-3'>
 						<thead class="bg-light">
 							<tr>
 								<th></th>
 								<th class="text-nowrap">Game Name</th>
 								<th>Review</th>
-								<th>Useful</th>
-								<th>Comments</th>
+								<th>Comment</th>
 							</tr>
 						</thead>
 
 						<tbody>
-							<% @reviews.each do |review| %>
+							<% @comments.each do |comment| %>
 								<tr>
 									<td class="align-middle">
-										<%= link_to game_reviews_path(review.game) do %>
-											<%= image_tag review.game.get_image, size: "90x100", alt: 'game image' %>
+										<%= link_to game_reviews_path(comment.review.game) do %>
+											<%= image_tag comment.review.game.get_image, size: "90x100" %>
 										<% end %>
 									</td>
 									<td class="align-middle">
 										<div class="ml-3">
-											<%= link_to review.game.name, game_reviews_path(review.game), class: 'text-dark' %>
+											<%= link_to comment.review.game.name, game_reviews_path(comment.review.game), class: 'text-dark' %>
 										</div>
 									</td>
 									<td class="align-middle">
 										<div class="ml-3 table-text">
-											<%= link_to safe_join(review.content.split("\n"),tag(:br)), game_review_path(review.game, review), class: 'text-dark' %>
+											<%= link_to safe_join(comment.review.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
 										</div>
 									</td>
 									<td class="align-middle">
-										<div class="ml-3">
-											<%= review.usefuls.count %>
-										</div>
-									</td>
-									<td class="align-middle">
-										<div class="ml-3">
-											<%= review.comments.count %>
+										<div class="ml-3 table-text">
+											<%= link_to safe_join(comment.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
 										</div>
 									</td>
 								</tr>
 							<% end %>
 						</tbody>
 					</table>
-
-					<div class="d-flex justify-content-center">
-						<p>
-							<%= paginate @reviews, theme: 'bootstrap-5' %>
-						</p>
-					</div>
-				</div>
+				<% else %>
+	        <div class="m-3">
+	          Nothing
+	        </div>
+	      <% end %>
 			</div>
-		</div>
-
-		<div class="row">
-  		<div class="ml-3">
-  			<span class="h2 mr-2">Comments List</span><span>(全<%= @user.comments.count %>件)</span>
-			</div>
-			<table class='table table-hover mt-3 ml-3'>
-				<thead class="bg-light">
-					<tr>
-						<th></th>
-						<th class="text-nowrap">Game Name</th>
-						<th>Review</th>
-						<th>Comment</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<% @comments.each do |comment| %>
-						<tr>
-							<td class="align-middle">
-								<%= link_to game_reviews_path(comment.review.game) do %>
-									<%= image_tag comment.review.game.get_image, size: "90x100" %>
-								<% end %>
-							</td>
-							<td class="align-middle">
-								<div class="ml-3">
-									<%= link_to comment.review.game.name, game_reviews_path(comment.review.game), class: 'text-dark' %>
-								</div>
-							</td>
-							<td class="align-middle">
-								<div class="ml-3 table-text">
-									<%= link_to safe_join(comment.review.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
-								</div>
-							</td>
-							<td class="align-middle">
-								<div class="ml-3 table-text">
-									<%= link_to safe_join(comment.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
-								</div>
-							</td>
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
 		</div>
 	<% else %>
 	  <div class="text-center mt-4 mb-2">
