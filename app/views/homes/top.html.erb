@@ -1,13 +1,16 @@
-<p class="text-center mb-5 h1">
-	Welcome</br>
-	<%= link_to 'to', admin_session_path, class: "text-dark" %></br>
-	GAME FINDER!!
-</p>
-
+<div class="container">
+	<div class="row d-flex justify-content-center">
+		<p class="text-center m-5 h1">
+			Welcome</br>
+			<%= link_to 'to', admin_session_path, style: "color: #212529;" %></br>
+			GAME FINDER
+		</p>
+	</div>
+</div>
 <% if user_signed_in? %>
 <% elsif admin_signed_in? %>
 <% else %>
-	<div class="text-center mt-5">
+	<div class="text-center mt-3">
 		<span class="mr-2">
 			<%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-secondary" %>
 		</span>

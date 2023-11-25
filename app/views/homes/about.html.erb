@@ -1,13 +1,16 @@
-<div>
-	<p class="text-center  mb-5 h1">About</p>
-	<p class="text-center h5">
-		<%= link_to 'ゲーム好き', admin_session_path, class: "text-dark" %>が集まるサイトです。</br>
-		プレイしたゲームのレビューをしたり、</br>
-		ゲームを探すことができます。</br>
-		レビューをしたユーザーの過去のゲーム歴や、</br>
-		そのゲームのレビューなども見ることができます。
-	</p>
+<div class="container">
+	<div class="row d-flex justify-content-center">
+		<p class="text-center  m-5 h1">About</p>
+	</div>
 </div>
+
+<p class="text-center h5 mt-3">
+	<%= link_to 'ゲーム好き', admin_session_path, style: "color: #212529;" %>が集まるサイトです。</br>
+	プレイしたゲームのレビューをしたり、</br>
+	ゲームを探すことができます。</br>
+	レビューをしたユーザーの過去のゲーム歴や、</br>
+	そのゲームのレビューなども見ることができます。
+</p>
 
 <% if user_signed_in? %>
 <% elsif admin_signed_in? %>
