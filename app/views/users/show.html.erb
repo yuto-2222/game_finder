@@ -27,7 +27,7 @@
 									<tr>
 										<td class="align-middle">
 											<%= link_to game_reviews_path(review.game) do %>
-												<%= image_tag review.game.get_image, size: "90x100", alt: 'game image' %>
+												<%= image_tag review.game.get_image, size: "90x100", alt: 'Game Image' %>
 											<% end %>
 										</td>
 										<td class="align-middle">
@@ -89,7 +89,7 @@
 								<tr>
 									<td class="align-middle">
 										<%= link_to game_reviews_path(comment.review.game) do %>
-											<%= image_tag comment.review.game.get_image, size: "90x100" %>
+											<%= image_tag comment.review.game.get_image, size: "90x100", alt: 'Game Image' %>
 										<% end %>
 									</td>
 									<td class="align-middle">

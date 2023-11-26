@@ -2,7 +2,7 @@
 	<div class="border-top d-flex align-items-center">
 		<div class="text-center m-3">
 			<%= link_to user_path(comment.user.id), class: 'text-dark' do %>
-				<%= image_tag comment.user.get_profile_image, size: "60x60", alt: 'user image' %></br>
+				<%= image_tag comment.user.get_profile_image, size: "60x60", alt: 'User Image' %></br>
 				<%= comment.user.nickname %>
 			<% end %>
 		</div>

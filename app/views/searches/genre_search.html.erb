@@ -20,14 +20,14 @@
     		<div class="ml-2">
 					<% if user_signed_in? %>
 						<% if current_user.nickname != 'ゲスト' %>
-							<%= link_to 'Add game', new_game_path, class: 'text-dark' %>
+							<%= link_to 'Add Game', new_game_path, class: 'text-dark' %>
 						<% end %>
 					<% elsif admin_signed_in? %>
-						<%= link_to 'Add game', new_game_path, class: 'text-dark' %>
+						<%= link_to 'Add Game', new_game_path, class: 'text-dark' %>
 					<% end %>
 				</div>
     	</div>
-    	
+
     	<%= render 'games/index', games: @games %>
 
       <div class="d-flex justify-content-center">
