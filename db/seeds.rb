@@ -1,6 +1,6 @@
-Admin.create!(
+Admin.find_or_create_by!(
 
   email: 'admin@admin',
-  password: 'password'
-
+  password: "#{ENV['admin_password']}"
   )
+  
