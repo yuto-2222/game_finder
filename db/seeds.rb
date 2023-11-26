@@ -1,3 +1,5 @@
+puts "seed start"
+
 Admin.find_or_create_by!(email: 'admin@admin.com') do |admin|
   admin.password = ENV['admin_password']
 end
@@ -13,3 +15,4 @@ Genre.find_or_create_by!(name: 'パズル')
 Genre.find_or_create_by!(name: '音楽')
 Genre.find_or_create_by!(name: 'カード')
 
+puts "seed finish"
