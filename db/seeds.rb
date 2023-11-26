@@ -1,7 +1,9 @@
 puts "seed start"
 
 Admin.find_or_create_by!(email: 'admin@admin.com') do |admin|
-  admin.password = ENV['admin_password']
+	unless admin.password.present?
+		admin.password = ENV['admin_password']
+	end
 end
 
 Genre.find_or_create_by!(name: 'ロールプレイング')
