@@ -14,20 +14,20 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :play_games, dependent: :destroy
   has_many :usefuls, dependent: :destroy
-  
+
   has_many :notifications, dependent: :destroy
 
   has_one_attached :profile_image
-  
+
   # ゲストアカウントを探し、無ければ作成
   def self.guest
     find_or_create_by!(email: 'guest@guest.com') do |user|
-      user.password = SecureRandom.urlsafe_base64
+      user.password = SecureRandom.alphanumeric(10)
       user.nickname = 'ゲスト'
       # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
     end
   end
-  
+
   # ProfileImage設定なければデフォルトを表示
   def get_profile_image
     unless profile_image.attached?
