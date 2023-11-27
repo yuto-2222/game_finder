@@ -13,7 +13,7 @@ class NotificationsController < ApplicationController
   def destroy
     # 通知は全件削除
     @notifications = current_user.notifications.destroy_all
-    redirect_to notifications_path
+    redirect_to request.referer
   end
 
 end

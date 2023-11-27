@@ -44,7 +44,7 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1 or /reviews/1.json
   def destroy
     @review.destroy
-    redirect_to request.referer
+    redirect_to games_path
   end
 
   private
