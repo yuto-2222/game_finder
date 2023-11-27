@@ -44,7 +44,13 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1 or /reviews/1.json
   def destroy
     @review.destroy
-    redirect_to games_path
+    game = Game.find(params[:game_id])
+    reviews = game.reviews
+    if reviews.exists?
+      redirect_to game_reviews_path(game)
+    else
+      redirect_to games_path
+    end
   end
 
   private
