@@ -30,7 +30,11 @@
 						<% end %>
 					</div>
 	    	</div>
-
+    		<div>
+	    		<%= link_to 'New', search_path(content: params[:content], latest: "true"), class: 'text-dark' %> |
+					<%= link_to 'Old', search_path(content: params[:content], earliest: "true"), class: 'text-dark' %> |
+					<%= link_to 'Popular', search_path(content: params[:content], popular: "true"), class: 'text-dark' %>
+				</div>
     		<%= render 'games/index', games: @games %>
 
       	<div class="d-flex justify-content-center">

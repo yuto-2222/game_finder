@@ -1,9 +1,4 @@
 <% if games.present? %>
-	<div>
-		<%= link_to 'New', games_path(latest: "true"), class: 'text-dark' %> |
-		<%= link_to 'Old', games_path(earliest: "true"), class: 'text-dark' %> |
-		<%= link_to 'Popular', games_path(popular: "true"), class: 'text-dark' %>
-	</div>
 	<table class='table table-hover'>
 		<thead class="bg-light">
 			<tr>
