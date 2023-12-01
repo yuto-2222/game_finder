@@ -8,7 +8,6 @@ class ReviewsController < ApplicationController
     @game = Game.find(game_id)
     # デフォルトでuseful多い順
     @reviews = @game.reviews.order(useful_count: :desc).page(params[:page]).per(8)
-
   end
 
   # GET /reviews/1 or /reviews/1.json

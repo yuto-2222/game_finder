@@ -70,13 +70,13 @@
 			</div>
 
 			<div class="my-3">
-  		  <span class="h2 mr-2">Comments List</span> <span>(全<%= @review.comments.count %>件)</span>
-        <div class="mt-3 ml-4">
+  		  <span class="h2 mr-2">Comments List</span> <span id="comment_count">(<%= @review.comments.count %>)</span>
+        <div class="mt-3 ml-4" id="comment_index">
           <%= render 'comments/index', comments: @comments %>
         </div>
         <% if user_signed_in? %>
           <% if current_user.nickname != 'ゲスト' %>
-            <div class="ml-4">
+            <div class="ml-4" id="comment_form">
               <%= render 'comments/form', game: @game, review: @review, comment: @comment %>
             </div>
           <% end %>

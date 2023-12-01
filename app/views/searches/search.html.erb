@@ -19,7 +19,7 @@
   			<p class="font-weight-bold d-flex justify-content-center">「<%= params[:content] %>」で検索したゲームは見つかりませんでした。</p>
 			<% else %>
 	    	<div class="my-3">
-	    		<span class="h2 mr-2">「<%= params[:content] %>」Search List</span> <span>(全<%= @search_games.count %>件)</span>
+	    		<span class="h2 mr-2">「<%= params[:content] %>」Search List</span> <span>(<%= @search_games.count %>)</span>
 	    		<div class="ml-2">
 						<% if user_signed_in? %>
 							<% if current_user.nickname != 'ゲスト' %>

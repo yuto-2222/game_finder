@@ -4,17 +4,18 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-    review = Review.find(params[:review_id])
+    @review = Review.find(params[:review_id])
     comment = current_user.comments.new(comment_params)
-    comment.review_id = review.id
+    comment.review_id = @review.id
     comment.save
-    redirect_to request.referer
+    @comments = @review.comments.order(created_at: :desc).page(params[:page]).per(8)
   end
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
+    @review = Review.find(params[:review_id])
     @comment.destroy
-    redirect_to request.referer
+    @comments = @review.comments.order(created_at: :desc).page(params[:page]).per(8)
   end
 
   private

@@ -16,7 +16,7 @@
 
     <div class='col-md-9 mt-5'>
     	<div class="my-3">
-    		<span class="h2 mr-2">「<%= @genre.name %>」Games List</span> <span>(全<%= @genre_games.count %>件)</span>
+    		<span class="h2 mr-2">「<%= @genre.name %>」Games List</span> <span>(<%= @genre_games.count %>)</span>
     		<div class="ml-2">
 					<% if user_signed_in? %>
 						<% if current_user.nickname != 'ゲスト' %>
