@@ -1,23 +1,23 @@
 <div class='container'>
 	<% if user_signed_in? %>
 		<% if current_user.nickname == 'ゲスト' %>
-	    <div class="text-center mt-4 mb-2">
+			<div class="text-center mt-4 mb-2">
 				Sign up
 				<%= link_to "here", users_guest_sign_out_path, method: :post %>
 			</div>
-	  <% end %>
-  <% end %>
-  <div class='row'>
-    <div class='col-6 col-md-3 mt-5'>
+		<% end %>
+	<% end %>
+	<div class='row'>
+		<div class='col-6 col-md-3 mt-5'>
 			<div>
 				<%= render 'layouts/genre', genres: @genres %>
 			</div>
 		</div>
 
-    <div class='col-md-9 mt-5'>
-    	<div class="my-3">
-    		<span class="h2 mr-2">「<%= @genre.name %>」Games List</span> <span>(<%= @genre_games.count %>)</span>
-    		<div class="ml-2">
+		<div class='col-md-9 mt-5'>
+			<div class="my-3">
+				<span class="h2 mr-2">「<%= @genre.name %>」Games List</span> <span>(<%= @genre_games.count %>)</span>
+				<div class="ml-2">
 					<% if user_signed_in? %>
 						<% if current_user.nickname != 'ゲスト' %>
 							<%= link_to 'Add Game', new_game_path, class: 'text-dark' %>
@@ -26,19 +26,19 @@
 						<%= link_to 'Add Game', new_game_path, class: 'text-dark' %>
 					<% end %>
 				</div>
-    	</div>
-    	<div>
-	    	<%= link_to 'New', genre_search_path(genre_id: @genre.id, latest: "true"), class: 'text-dark' %> |
+			</div>
+			<div>
+				<%= link_to 'New', genre_search_path(genre_id: @genre.id, latest: "true"), class: 'text-dark' %> |
 				<%= link_to 'Old', genre_search_path(genre_id: @genre.id, earliest: "true"), class: 'text-dark' %> |
 				<%= link_to 'Popular', genre_search_path(genre_id: @genre.id, popular: "true"), class: 'text-dark' %>
-    	</div>
-    	<%= render 'games/index', games: @games %>
+			</div>
+			<%= render 'games/index', games: @games %>
 
-      <div class="d-flex justify-content-center">
-  			<p>
-    			<%= paginate @games, theme: 'bootstrap-5' %>
-	  		</p>
- 			</div>
+			<div class="d-flex justify-content-center">
+				<p>
+					<%= paginate @games, theme: 'bootstrap-5' %>
+				</p>
+			</div>
 
 		</div>
 	</div>

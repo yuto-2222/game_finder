@@ -1,19 +1,19 @@
 <% if user_signed_in? %>
-  <% if current_user.nickname != 'ゲスト' %>
+	<% if current_user.nickname != 'ゲスト' %>
 		<% if review.was_useful_by?(current_user) %>
-		  <%= link_to game_review_usefuls_path(review.game, review), method: :delete, remote: true, class: 'text-dark' do %>
-		    <i class="fa-regular fa-thumbs-up" aria-hidden="true" style="color: brown;"></i>
-		    <%= review.usefuls.count %>
-		  <% end %>
+			<%= link_to game_review_usefuls_path(review.game, review), method: :delete, remote: true, class: 'text-dark' do %>
+				<i class="fa-regular fa-thumbs-up" aria-hidden="true" style="color: brown;"></i>
+				<%= review.usefuls.count %>
+			<% end %>
 		<% else %>
-		  <%= link_to game_review_usefuls_path(review.game, review), method: :post, remote: true, class: 'text-dark' do %>
-		    <i class="fa-regular fa-thumbs-up" aria-hidden="true"></i>
-		    <%= review.usefuls.count %>
-		  <% end %>
+			<%= link_to game_review_usefuls_path(review.game, review), method: :post, remote: true, class: 'text-dark' do %>
+				<i class="fa-regular fa-thumbs-up" aria-hidden="true"></i>
+				<%= review.usefuls.count %>
+			<% end %>
 		<% end %>
 	<% else %>
-    <%= review.usefuls.count %>
-  <% end %>
+		<%= review.usefuls.count %>
+	<% end %>
 <% elsif admin_signed_in? %>
-  <%= review.usefuls.count %>
+	<%= review.usefuls.count %>
 <% end %>

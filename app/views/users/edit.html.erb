@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row">
-    <p class="font-weight-bold bg-secondary bg-secondary text-light mx-auto mt-5 p-1 h5">
+	<div class="row">
+		<p class="font-weight-bold bg-secondary bg-secondary text-light mx-auto mt-5 p-1 h5">
 			User Information Editing
 		</p>
 	</div>
@@ -9,51 +9,51 @@
 		<div class="col-6 mx-auto">
 			<%= render 'layouts/errors', obj: @user %>
 
-      <%= form_with model: @user do |f| %>
-        <div class="form-group text-nowrap mt-3 mb-3">
-          <%= f.label :profile_image, 'Profile Image' %></br>
-          <%= f.file_field :profile_image, accept: 'image/*', class: "ml-4" %>
-          <small class="form-text text-muted ml-4">
-            It's OK without this.
-          </small>
-        </div>
+			<%= form_with model: @user do |f| %>
+				<div class="form-group text-nowrap mt-3 mb-3">
+					<%= f.label :profile_image, 'Profile Image' %></br>
+					<%= f.file_field :profile_image, accept: 'image/*', class: "ml-4" %>
+					<small class="form-text text-muted ml-4">
+						It's OK without this.
+					</small>
+				</div>
 
-        <div class="form-group text-nowrap mt-3 mb-3">
-          <%= f.label :nickname, 'Nickname' %></br>
-          <%= f.text_field :nickname, class: "ml-4" %>
-        </div>
+				<div class="form-group text-nowrap mt-3 mb-3">
+					<%= f.label :nickname, 'Nickname' %></br>
+					<%= f.text_field :nickname, class: "ml-4" %>
+				</div>
 
-        <div class="form-group text-nowrap mt-3 mb-3">
-          <%= f.label :introduction, 'Introduction' %></br>
-          <%= f.text_area :introduction, rows: '3', cols: '30', placeholder: 'Type your introduction here', class: "ml-4" %>
-          <small class="form-text text-muted ml-4">
-            It's OK without this.
-          </small>
-        </div>
+				<div class="form-group text-nowrap mt-3 mb-3">
+					<%= f.label :introduction, 'Introduction' %></br>
+					<%= f.text_area :introduction, rows: '3', cols: '30', placeholder: 'Type your introduction here', class: "ml-4" %>
+					<small class="form-text text-muted ml-4">
+						It's OK without this.
+					</small>
+				</div>
 
-        <% if admin_signed_in? %>
-          <div class="form-group text-nowrap mt-3 mb-3">
-            <%= f.label :is_active, "User Status" %>
-            <div class="form-inline">
-              <%= f.radio_button :is_active, :true, checked: @user.is_active, class: "ml-4 form-control" %>
-              <%= label_tag 'is_active_true', 'Active', class: "ml-1" %>
-              <%= f.radio_button :is_active, :false, checked: !@user.is_active, class: "ml-4 form-control" %>
-              <%= label_tag 'is_active_false', 'Deleted', class: "ml-1" %>
-            </div>
-          </div>
-        <% end %>
+				<% if admin_signed_in? %>
+					<div class="form-group text-nowrap mt-3 mb-3">
+						<%= f.label :is_active, "User Status" %>
+						<div class="form-inline">
+							<%= f.radio_button :is_active, :true, checked: @user.is_active, class: "ml-4 form-control" %>
+							<%= label_tag 'is_active_true', 'Active', class: "ml-1" %>
+							<%= f.radio_button :is_active, :false, checked: !@user.is_active, class: "ml-4 form-control" %>
+							<%= label_tag 'is_active_false', 'Deleted', class: "ml-1" %>
+						</div>
+					</div>
+				<% end %>
 
-        <div class="form-group text-center">
-          <%= f.submit 'Update', class: 'btn btn-secondary' %>
-        </div>
-      <% end %>
+				<div class="form-group text-center">
+					<%= f.submit 'Update', class: 'btn btn-secondary' %>
+				</div>
+			<% end %>
 
-      <% if @user == current_user %>
-        <div class="text-center">
-          <%= button_to 'Delete', cancel_user_path(@user), method: :patch,
-              data: { confirm: 'Are you sure you want to delete an account ?' }, class: "btn btn-dark" %>
-        </div>
-      <% end %>
-    </div>
-  </div>
+			<% if @user == current_user %>
+				<div class="text-center">
+					<%= button_to 'Delete', cancel_user_path(@user), method: :patch,
+						data: { confirm: 'Are you sure you want to delete an account ?' }, class: "btn btn-dark" %>
+				</div>
+			<% end %>
+		</div>
+	</div>
 </div>

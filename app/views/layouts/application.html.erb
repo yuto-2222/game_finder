@@ -1,40 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>GameFinder</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <script src="https://kit.fontawesome.com/0b30530af2.js" crossorigin="anonymous"></script>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+	<head>
+		<title>GameFinder</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<%= csrf_meta_tags %>
+		<%= csp_meta_tag %>
+		<script src="https://kit.fontawesome.com/0b30530af2.js" crossorigin="anonymous"></script>
+		<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	</head>
 
-      body {
-        /*半角英数折返しの設定*/
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-      }
-
-      .main{
-        margin: 100px 0;
-      }
-
-    </style>
-  </head>
-
-  <body>
-    <%= render 'layouts/header' %>
-    <div class="main">
-      <%= render 'layouts/flash' %>
-      <%= yield %>
-    </div>
-    <%= render 'layouts/footer' %>
-  </body>
+	<body>
+		<%= render 'layouts/header' %>
+		<div class="main">
+			<%= render 'layouts/flash' %>
+			<%= yield %>
+		</div>
+		<%= render 'layouts/footer' %>
+	</body>
 </html>

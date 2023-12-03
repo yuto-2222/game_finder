@@ -1,25 +1,53 @@
 @use '~bootstrap/scss/bootstrap';
 
- /* pagenation layouts */
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	// 半角英数折返しの設定
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+.main{
+	margin: 100px 0;
+}
+
+.obj-img{
+	width: 90px;
+	height: 90px;
+	object-fit: cover;
+}
+
+.comment-user-img{
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+}
+
+// pagenation layouts
 $pagenation_color: #343a40;
 
 .page-item.active .page-link {
-  background-color: $pagenation_color;
-  border-color: $pagenation_color;
+	background-color: $pagenation_color;
+	border-color: $pagenation_color;
 }
 
 .a page-link {
-  color: $pagenation_color;
+	color: $pagenation_color;
 }
 
 .page-item a:hover {
-  color: $pagenation_color;
+	color: $pagenation_color;
 }
 
 .page-item a {
-  color: $pagenation_color;
+	color: $pagenation_color;
 }
 
 .table-text{
-  max-width: 500px;
+	max-width: 500px;
 }

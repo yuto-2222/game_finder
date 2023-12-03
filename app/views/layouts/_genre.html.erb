@@ -1,13 +1,13 @@
 <table class=" table border border-dark", style="width:80%;">
-  <th class="text-center align-middle border-bottom border-dark">
-    Genre
-  </th>
+	<th class="text-center align-middle border-bottom border-dark">
+		Genre
+	</th>
 
-  <%= form_with url: genre_search_path, method: :get do |f| %>
-    <% genres.each do |genre| %>
-      <tr>
-        <td class="border border-0 text-center align-middle"><%= link_to genre.name, genre_search_path(genre_id: genre.id), method: :get, class: 'text-dark' %></td>
-      </tr>
-    <% end %>
-  <% end %>
+	<%= form_with url: genre_search_path, method: :get do |f| %>
+		<% genres.each do |genre| %>
+			<tr>
+				<td class="border border-0 text-center align-middle"><%= link_to genre.name, genre_search_path(genre_id: genre.id), method: :get, class: 'text-dark' %></td>
+			</tr>
+		<% end %>
+	<% end %>
 </table>

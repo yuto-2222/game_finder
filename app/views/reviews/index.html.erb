@@ -1,22 +1,22 @@
 <div class='container'>
 	<% if user_signed_in? %>
 		<% if current_user.nickname == 'ゲスト' %>
-	    <div class="text-center mt-4 mb-2">
+			<div class="text-center mt-4 mb-2">
 				Sign up
 				<%= link_to "here", users_guest_sign_out_path, method: :post %>
 			</div>
-	  <% end %>
-  <% end %>
-  <div class='row'>
-    <div class='col-6 col-md-3 mt-5'>
+		<% end %>
+	<% end %>
+	<div class='row'>
+		<div class='col-6 col-md-3 mt-5'>
 			<div>
 				<%= render 'games/info', game: @game %>
 			</div>
 		</div>
 
 		<div class='col-md-9 mt-5'>
-    	<div class="my-3">
-    		<span class="h2 mr-2">Reviews List</span> <span>(<%= @game.reviews.count %>)</span>
+			<div class="my-3">
+				<span class="h2 mr-2">Reviews List</span> <span>(<%= @game.reviews.count %>)</span>
 				<% if user_signed_in? %>
 					<% if current_user.nickname != 'ゲスト' %>
 						<div class="ml-2">

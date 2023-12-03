@@ -1,59 +1,59 @@
 <table class="table border border-dark">
-  <th class="text-center align-middle border-bottom border-dark">
-    Information
-  </th>
-  <tr>
-    <td class="align-middle">
-      <div class="text-center">
-        <%= image_tag game.get_image, size: "90x100", alt: 'game image' %>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td class="align-middle">
-      <p>Game name:</p>
-      <div class="text-center">
-        <%= game.name %>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td class="align-middle">
-      <p>Genre:</p>
-      <div class="text-center">
-        <%= game.genre.name %>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td class="align-middle">
-      <p>Release date:</p>
-      <div class="text-center">
-        <%= game.release_date.strftime('%Y年%m月%d日') %>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td class="align-middle">
-      <p>Played:</p>
-      <div class="text-center", id="play_game_buttons_<%= game.id %>">
-        <%= render 'play_games/btn', game: game %>
-      </div>
-    </td>
-  </tr>
-  <% if user_signed_in? %>
-    <% if current_user.nickname != 'ゲスト' %>
-      <tr>
-        <td class="text-center">
-          <%= link_to 'Edit', edit_game_path(game), class: 'text-dark' %>
-        </td>
-      </tr>
-    <% end %>
-  <% elsif admin_signed_in? %>
-    <tr>
-      <td class="text-center">
-        <%= link_to 'Edit', edit_game_path(game), class: 'text-dark' %>
-      </td>
-    </tr>
-  <% end %>
+	<th class="text-center align-middle border-bottom border-dark">
+		Information
+	</th>
+	<tr>
+		<td class="align-middle">
+			<div class="text-center">
+				<%= image_tag game.get_image, class: "obj-img", alt: 'game image' %>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="align-middle">
+			<p>Game name:</p>
+			<div class="text-center">
+				<%= game.name %>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="align-middle">
+			<p>Genre:</p>
+			<div class="text-center">
+				<%= game.genre.name %>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="align-middle">
+			<p>Release date:</p>
+			<div class="text-center">
+				<%= game.release_date.strftime('%m/%d/%Y') %>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="align-middle">
+			<p>Played:</p>
+			<div class="text-center", id="play_game_buttons_<%= game.id %>">
+				<%= render 'play_games/btn', game: game %>
+			</div>
+		</td>
+	</tr>
+	<% if user_signed_in? %>
+		<% if current_user.nickname != 'ゲスト' %>
+			<tr>
+				<td class="text-center">
+					<%= link_to 'Edit', edit_game_path(game), class: 'text-dark' %>
+				</td>
+			</tr>
+		<% end %>
+	<% elsif admin_signed_in? %>
+		<tr>
+			<td class="text-center">
+				<%= link_to 'Edit', edit_game_path(game), class: 'text-dark' %>
+			</td>
+		</tr>
+	<% end %>
 </table>

@@ -1,19 +1,19 @@
 <% if user_signed_in? %>
-  <% if current_user.nickname != 'ゲスト' %>
-    <% if game.played_by?(current_user) %>
-      <%= link_to game_play_games_path(game), method: :delete, remote: true, class: 'text-dark' do %>
-        <i class="fa-solid fa-gamepad" aria-hidden="true" style="color: brown;"></i>
-        : <%= game.play_games.count %>
-      <% end %>
-    <% else %>
-      <%= link_to game_play_games_path(game), method: :post, remote: true, class: 'text-dark' do %>
-        <i class="fa-solid fa-gamepad" aria-hidden="true"></i>
-        : <%= game.play_games.count %>
-      <% end %>
-    <% end %>
-  <% else %>
-    <%= game.play_games.count %>
-  <% end %>
+	<% if current_user.nickname != 'ゲスト' %>
+		<% if game.played_by?(current_user) %>
+			<%= link_to game_play_games_path(game), method: :delete, remote: true, class: 'text-dark' do %>
+				<i class="fa-solid fa-gamepad" aria-hidden="true" style="color: brown;"></i>
+				: <%= game.play_games.count %>
+			<% end %>
+		<% else %>
+			<%= link_to game_play_games_path(game), method: :post, remote: true, class: 'text-dark' do %>
+				<i class="fa-solid fa-gamepad" aria-hidden="true"></i>
+				: <%= game.play_games.count %>
+			<% end %>
+		<% end %>
+	<% else %>
+		<%= game.play_games.count %>
+	<% end %>
 <% elsif admin_signed_in? %>
-  <%= game.play_games.count %>
+	<%= game.play_games.count %>
 <% end %>

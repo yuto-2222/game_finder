@@ -17,7 +17,7 @@
 						data-href="<%= game_reviews_path(game) %>"
 						style="cursor: pointer;">
 					<td>
-						<%= image_tag game.get_image, size: "90x100", alt: 'game image' %>
+						<%= image_tag game.get_image, class: "obj-img", alt: 'game image' %>
 					</td>
 					<td class="align-middle text-dark">
 						<div class="ml-3">
@@ -26,7 +26,7 @@
 					</td>
 					<td class="align-middle text-dark">
 						<div class="ml-3">
-							<%= game.release_date.strftime('%Y年%m月%d日') %>
+							<%= game.release_date.strftime('%m/%d/%Y') %>
 						</div>
 					</td>
 					<td class="align-middle text-dark">
@@ -45,8 +45,8 @@
 	</table>
 
 <% else %>
-  <div class="text-center">
-    Nothing
-  </div>
+	<div class="text-center">
+		Nothing
+	</div>
 <% end %>
 
