@@ -39,8 +39,18 @@ class ReviewsController < ApplicationController
 		end
 	end
 
-	def update
+	def edit
+		@game = Game.find(params[:game_id])
+	end
 
+	def update
+		@game = Game.find(params[:game_id])
+		if @review.update(review_params)
+			flash[:notice] = 'Success !'
+			redirect_to game_review_path(@game, @review)
+		else
+			render 'edit'
+		end
 	end
 
 	# DELETE /reviews/1 or /reviews/1.json

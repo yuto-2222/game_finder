@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
   resources :games, except: [:show] do
     resource :play_games, only: [:create, :destroy]
-    resources :reviews, except: [:edit] do
+    resources :reviews do
       resource :usefuls, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
