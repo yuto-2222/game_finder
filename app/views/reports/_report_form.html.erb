@@ -1,0 +1,33 @@
+<%= simple_form_for report, remote: true do |f| %>
+	<div class="form-check">
+		<%= f.radio_button :reason, "malicious_expression" %>
+		<%= f.label :reason_malicious_expression, "Malicious Expression", class: "form-check-label" %>
+	</div>
+	<div class="form-check">
+		<%= f.radio_button :reason, "inappropriate_content" %>
+		<%= f.label :reason_inappropriate_content, "Inappropriate Content", class: "form-check-label" %>
+	</div>
+	<div class="form-check">
+		<%= f.radio_button :reason, "misinformation" %>
+		<%= f.label :reason_misinformation, "Misinformation", class: "form-check-label" %>
+	</div>
+	<div class="form-check">
+		<%= f.radio_button :reason, "commercial_purposes" %>
+		<%= f.label :reason_commercial_purposes, "Commercial Purposes", class: "form-check-label" %>
+	</div>
+	<div class="form-check">
+		<%= f.radio_button :reason, "spam" %>
+		<%= f.label :reason_spam, "Spam", class: "form-check-label" %>
+	</div>
+	<div class="form-check">
+		<%= f.radio_button :reason, "other" %>
+		<%= f.label :reason_other, "Other", class: "form-check-label" %>
+	</div>
+
+	<%= f.hidden_field :content_id, value: params[:content_id] %>
+	<%= f.hidden_field :content_type, value: params[:content_type] %>
+
+	<div class="text-center mt-3">
+		<%= f.submit "Report", class: "btn btn-dark" %>
+	</div>
+<% end %>

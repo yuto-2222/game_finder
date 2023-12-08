@@ -71,3 +71,5 @@ gem "net-pop"
 gem "net-imap"
 
 gem 'dotenv-rails'
+gem 'simple_form'
+gem 'enum_help'

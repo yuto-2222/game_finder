@@ -1,40 +1,43 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable
+	# Include default devise modules. Others available are:
+	# :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+	devise :database_authenticatable, :registerable,
+				 :recoverable, :rememberable
 
-  # バリデーション
-  validates :nickname, presence: true,  uniqueness: true
-  validates :email, presence: true, format: { with: /\A[a-zA-Z0-9]{1,}[@][a-zA-Z0-9]{1,}[.][a-zA-Z0-9]{1,}\z/ }, uniqueness: true
-  validates :password, length: { minimum: 6, maximum: 20 }, on: :create
+	# バリデーション
+	validates :nickname, presence: true,  uniqueness: true
+	validates :email, presence: true, format: { with: /\A[a-zA-Z0-9]{1,}[@][a-zA-Z0-9]{1,}[.][a-zA-Z0-9]{1,}\z/ }, uniqueness: true
+	validates :password, length: { minimum: 6, maximum: 20 }, on: :create
 
-  # アソシエーション
-  has_many :reviews, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :play_games, dependent: :destroy
-  has_many :usefuls, dependent: :destroy
+	# アソシエーション
+	has_many :reviews, dependent: :destroy
+	has_many :comments, dependent: :destroy
+	has_many :play_games, dependent: :destroy
+	has_many :usefuls, dependent: :destroy
+	has_many :notifications, dependent: :destroy
 
-  has_many :notifications, dependent: :destroy
+	has_one_attached :profile_image
 
-  has_one_attached :profile_image
+	# 通報
+	has_many :reporter, class_name: "Report", foreign_key: "reporter_id", dependent: :destroy
+	has_many :reported, class_name: "Report", foreign_key: "reported_id", dependent: :destroy
 
-  # ゲストアカウントを探し、無ければ作成
-  def self.guest
-    find_or_create_by!(email: 'guest@guest.com') do |user|
-      user.password = SecureRandom.alphanumeric(10)
-      user.nickname = 'ゲスト'
-      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
-    end
-  end
+	# ゲストアカウントを探し、無ければ作成
+	def self.guest
+		find_or_create_by!(email: 'guest@guest.com') do |user|
+			user.password = SecureRandom.alphanumeric(10)
+			user.nickname = 'ゲスト'
+			# user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
+		end
+	end
 
-  # ProfileImage設定なければデフォルトを表示
-  def get_profile_image
-    unless profile_image.attached?
-      file_path = Rails.root.join('app/assets/images/no_profile_image.jpg')
-      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
-    end
-      profile_image
-  end
+	# ProfileImage設定なければデフォルトを表示
+	def get_profile_image
+		unless profile_image.attached?
+			file_path = Rails.root.join('app/assets/images/no_profile_image.jpg')
+			profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+		end
+			profile_image
+	end
 
 end

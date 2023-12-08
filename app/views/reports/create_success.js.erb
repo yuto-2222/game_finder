@@ -1,0 +1,8 @@
+<!--通報成功メッセージを表示-->
+$('.success-message').text('Success !');
+
+<!--モーダルウィンドウを閉じる-->
+$('#report-modal').addClass('fade-out');
+setTimeout(() => {
+  $('#report-modal').hide().removeClass('fade-out');
+}, 300);

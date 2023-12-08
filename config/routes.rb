@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'reports/new'
   devise_for :users, controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -43,5 +44,7 @@ Rails.application.routes.draw do
   end
 
   resources :notifications, only: [:index, :destroy]
+
+	resources :reports, only: [:new, :create]
 
 end
