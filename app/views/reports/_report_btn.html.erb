@@ -11,13 +11,14 @@
 	$(document).ready(function() {
 	  // モーダルウィンドウを開くボタンがクリックされたときの処理
 	  $('.open-report-modal-button').click(function() {
-	    const commentId = $(this).data("comment-id");
+	    const contentId = $(this).data("content-id");
+	    const contentType = $(this).data("content-type");
 
 	    // Ajaxリクエストを送信して報告フォームを取得
 	    $.ajax({
 	      url: '<%= new_report_path %>',
 	      type: 'GET',
-	      data: { content_id: commentId, content_type: "Comment" },
+	      data: { content_id: contentId, content_type: contentType },
 	      success: function(response) {
 	        // 取得した報告フォームをモーダル内に表示
 	        $('#report-modal .common-modal-content').html(response);

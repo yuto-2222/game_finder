@@ -4,6 +4,10 @@ class ReportsController < ApplicationController
 		render :layout => false
 	end
 
+	def index
+		@reports = Report.all.order(created_at: :desc)
+	end
+
 	def create
 		# ユーザーが報告する対象の種類とIDを取得
 		content_type = params[:report][:content_type]

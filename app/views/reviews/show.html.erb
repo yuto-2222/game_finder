@@ -61,6 +61,10 @@
 											data: { confirm: 'Are you sure you want to delete this review ?' }, class: "btn btn-dark" %>
 									<% elsif user_signed_in? && current_user == @review.user %>
 										<%= link_to 'Edit', edit_game_review_path(@game, @review), class: "text-dark" %>
+									<% elsif @review.user != current_user && current_user.nickname != 'ゲスト' %>
+										<div class="report-btn text-right mr-2" id="report-btn-<%= @review.id %>">
+											<%= render "reports/report_btn", comment: @review, content_id: @review.id, content_type: "Review" %>
+										</div>
 									<% end %>
 									<div>
 										<%= @review.created_at.strftime('%m/%d/%Y %H:%M') %>
