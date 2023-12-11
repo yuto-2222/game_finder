@@ -11,7 +11,7 @@
 		<td class="text-center align-middle">
 			<% if user != current_user && current_user.nickname != 'ゲスト' %>
 				<div class="report-btn text-right mr-2" id="report-btn-<%= user.id %>">
-					<%= render "reports/report_btn", comment: user %>
+					<%= render "reports/report_btn", comment: user, content_id: user.id, content_type: user.class.name %>
 				</div>
 			<% end %>
 			<%= image_tag user.get_profile_image, size: '100x100', alt: 'User Image' %>

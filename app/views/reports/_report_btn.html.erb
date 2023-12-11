@@ -1,41 +1,41 @@
  <!-- モーダルウィンドウのトリガーボタンを追加 -->
 <i class="fas fa-ellipsis open-report-modal-button" data-comment-id="<%= comment.id %>"
-	data-content-id="<%= comment.id %>" data-content-type="Comment" data-report-success="true"
+	data-content-id="<%= comment.id %>" data-content-type="<%= comment.class.name %>" data-report-success="true"
 	style="cursor: pointer;"></i>
 
 <div id="report-modal" class="modal">
-  <div class="common-modal-content"></div>
+	<div class="common-modal-content"></div>
 </div>
 
 <script>
 	$(document).ready(function() {
-	  // モーダルウィンドウを開くボタンがクリックされたときの処理
-	  $('.open-report-modal-button').click(function() {
-	    const contentId = $(this).data("content-id");
-	    const contentType = $(this).data("content-type");
+		// モーダルウィンドウを開くボタンがクリックされたときの処理
+		$('.open-report-modal-button').click(function() {
+			const contentId = $(this).data("content-id");
+			const contentType = $(this).data("content-type");
 
-	    // Ajaxリクエストを送信して報告フォームを取得
-	    $.ajax({
-	      url: '<%= new_report_path %>',
-	      type: 'GET',
-	      data: { content_id: contentId, content_type: contentType },
-	      success: function(response) {
-	        // 取得した報告フォームをモーダル内に表示
-	        $('#report-modal .common-modal-content').html(response);
-	        $('#report-modal').addClass('fade-in').show();
-	      }
-	    });
-	  });
+			// Ajaxリクエストを送信して報告フォームを取得
+			$.ajax({
+				url: '<%= new_report_path %>',
+				type: 'GET',
+				data: { content_id: contentId, content_type: contentType },
+				success: function(response) {
+					// 取得した報告フォームをモーダル内に表示
+					$('#report-modal .common-modal-content').html(response);
+					$('#report-modal').addClass('fade-in').show();
+				}
+			});
+		});
 
-	  // モーダルウィンドウの背景部分がクリックされたときの処理
-	  $('#report-modal').on('click', function(event) {
-	    if (event.target === this) {
-	      // モーダルを非表示にするアニメーション
-	      $(this).addClass('fade-out');
-	      setTimeout(() => {
-	        $(this).hide().removeClass('fade-out');
-	      }, 300);
-	    }
-	  });
+		// モーダルウィンドウの背景部分がクリックされたときの処理
+		$('#report-modal').on('click', function(event) {
+			if (event.target === this) {
+				// モーダルを非表示にするアニメーション
+				$(this).addClass('fade-out');
+				setTimeout(() => {
+					$(this).hide().removeClass('fade-out');
+				}, 300);
+			}
+		});
 	});
 </script>

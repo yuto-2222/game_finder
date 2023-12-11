@@ -23,7 +23,11 @@ class ReportsController < ApplicationController
 
 			# 報告者と報告対象を設定
 			@report.reporter = current_user
-			@report.reported = @content.user
+			if @content.is_a?(User)
+			  @report.reported = @content
+			else
+				@report.reported = @content.user
+			end
 
 			# 報告をデータベースに保存
 			if @report.save
