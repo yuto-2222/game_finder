@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
 
   def index
     # 通知を新しい順に
-    @notifications = current_user.notifications.order(created_at: :desc).page(params[:page]).per(10)
+    @notifications = current_user.notifications.order(created_at: :desc).page(params[:page]).per(20)
     # pageを開いたらcheckedに変更
     @notifications.where(checked: false).each do |notification|
       notification.update(checked: true)

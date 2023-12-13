@@ -17,4 +17,17 @@ class Report < ApplicationRecord
 		spam: 4,                      # スパム
 		other: 5                      # その他
 	}
+
+	def link_to_reported_user(report)
+	  if report.reported.is_a?(User)
+	    link_to report.reported.nickname, user_path(report.reported), target: "_blank"
+	  elsif report.reported.is_a?(Review)
+	    link_to "View Review", review_path(report.reported), target: "_blank"
+	  elsif report.reported.is_a?(Comment)
+	    link_to "View Comment", comment_path(report.reported), target: "_blank"
+	  else
+	    "Unknown Type"
+	  end
+	end
+
 end

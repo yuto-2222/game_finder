@@ -45,6 +45,6 @@ Rails.application.routes.draw do
 
   resources :notifications, only: [:index, :destroy]
 
-	resources :reports, only: [:new, :create, :index]
+	resources :reports, only: [:new, :create, :index, :destroy]
 
 end

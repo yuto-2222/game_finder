@@ -18,6 +18,12 @@
 						</tr>
 					<% end %>
 				</table>
+
+				<div class="d-flex justify-content-center">
+					<p>
+						<%= paginate @notifications, theme: 'bootstrap-5' %>
+					</p>
+				</div>
 			<% else %>
 				<div class="text-center">
 					Nothing

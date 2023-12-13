@@ -1,11 +1,16 @@
 class ReportsController < ApplicationController
+	before_action :authenticate_admin!, only: [:index, :destroy]
 	def new
 		@report = Report.new
 		render :layout => false
 	end
 
 	def index
-		@reports = Report.all.order(created_at: :desc)
+		@reports = Report.all.order(created_at: :desc).page(params[:page]).per(10)
+
+		@reports.where(is_checked: false).each do |report|
+      report.update(is_checked: true)
+    end
 	end
 
 	def create
@@ -46,6 +51,11 @@ class ReportsController < ApplicationController
 		respond_to do |format|
 			format.js { render "create_failure", status: :unprocessable_entity } # エラーレスポンスを返す
 		end
+	end
+
+	def destroy
+		@report = Report.find(params[:id]).destroy
+		redirect_to request.referer
 	end
 
 	private
