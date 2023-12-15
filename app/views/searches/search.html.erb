@@ -30,7 +30,7 @@
 						<% end %>
 					</div>
 				</div>
-				<div>
+				<div class="mb-2">
 					<%= link_to 'New', search_path(content: params[:content], latest: "true"), class: 'text-dark' %> |
 					<%= link_to 'Old', search_path(content: params[:content], earliest: "true"), class: 'text-dark' %> |
 					<%= link_to 'Popular', search_path(content: params[:content], popular: "true"), class: 'text-dark' %>

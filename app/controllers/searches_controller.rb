@@ -10,15 +10,15 @@ class SearchesController < ApplicationController
 		# 並び替え方法で分岐
 		## latestで新しい順
 		if params[:latest] == "true"
-			@games = games.latest.page(params[:page]).per(8)
+			@games = games.latest.page(params[:page]).per(12)
 		## earliestで古い順
 		elsif params[:earliest] == "true"
-			@games = games.earliest.page(params[:page]).per(8)
+			@games = games.earliest.page(params[:page]).per(12)
 		## popularで人気順
 		elsif params[:popular] == "true"
-			@games = games.popular.page(params[:page]).per(8)
+			@games = games.popular.page(params[:page]).per(12)
 		else
-			@games = games.all.page(params[:page]).per(8)
+			@games = games.all.page(params[:page]).per(12)
 		end
 	end
 
@@ -28,15 +28,15 @@ class SearchesController < ApplicationController
 		# 並び替え方法で分岐
 		## latestで新しい順
 		if params[:latest] == "true"
-			@games = games.latest.page(params[:page]).per(8)
+			@games = games.latest.page(params[:page]).per(12)
 		## earliestで古い順
 		elsif params[:earliest] == "true"
-			@games = games.earliest.page(params[:page]).per(8)
+			@games = games.earliest.page(params[:page]).per(12)
 		## popularで人気順
 		elsif params[:popular] == "true"
-			@games = games.popular.page(params[:page]).per(8)
+			@games = games.popular.page(params[:page]).per(12)
 		else
-			@games = games.all.page(params[:page]).per(8)
+			@games = games.all.page(params[:page]).per(12)
 		end
 		@genres = Genre.all
 	end

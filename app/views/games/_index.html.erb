@@ -1,48 +1,36 @@
 <% if games.present? %>
-	<table class='table table-hover'>
-		<thead class="bg-light">
-			<tr>
-				<th></th>
-				<th class="text-nowrap">Game Name</th>
-				<th>Release Date</th>
-				<th>Played</th>
-				<th>Reviews</th>
-			</tr>
-		</thead>
+	<div class="row">
+		<% games.each do |game| %>
+			<div class="col-6 col-md-4">
+				<div class="card mb-3"
+					data-controller="href"
+					data-action="click->href#toHref"
+					data-href="<%= game_reviews_path(game) %>"
+					style="cursor: pointer;">
 
-		<tbody>
-			<% games.each do |game| %>
-				<tr data-controller="href"
-						data-action="click->href#toHref"
-						data-href="<%= game_reviews_path(game) %>"
-						style="cursor: pointer;">
-					<td>
-						<%= image_tag game.get_image, class: "obj-img", alt: 'game image' %>
-					</td>
-					<td class="align-middle text-dark">
-						<div class="ml-3">
+					<%= image_tag game.get_image, class: "card-img-top", alt: 'game image' %>
+
+					<div class="card-body">
+						<h5 class="card-title">
 							<%= game.name %>
-						</div>
-					</td>
-					<td class="align-middle text-dark">
-						<div class="ml-3">
-							<%= game.release_date.strftime('%m/%d/%Y') %>
-						</div>
-					</td>
-					<td class="align-middle text-dark">
-						<div class="ml-3">
-							<%= game.play_games.count %>
-						</div>
-					</td>
-					<td class="align-middle text-dark">
-						<div class="ml-3">
-							<%= game.reviews.count %>
-						</div>
-					</td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
+						</h5>
+					</div>
+
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							Release Date : <%= game.release_date.strftime('%m/%d/%Y') %>
+						</li>
+						<li class="list-group-item">
+							Played : <%= game.play_games.count %>
+						</li>
+						<li class="list-group-item">
+							Reviews : <%= game.reviews.count %>
+						</li>
+					</ul>
+				</div>
+			</div>
+		<% end %>
+	</div>
 
 <% else %>
 	<div class="text-center">

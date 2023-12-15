@@ -7,15 +7,15 @@ class GamesController < ApplicationController
     # 並び替え方法で分岐
     ## latestで新しい順
     if params[:latest] == "true"
-      @games = Game.latest.page(params[:page]).per(8)
+      @games = Game.latest.page(params[:page]).per(12)
     ## earliestで古い順
     elsif params[:earliest] == "true"
-      @games = Game.earliest.page(params[:page]).per(8)
+      @games = Game.earliest.page(params[:page]).per(12)
     ## popularで人気順
     elsif params[:popular] == "true"
-      @games = Game.popular.page(params[:page]).per(8)
+      @games = Game.popular.page(params[:page]).per(12)
     else
-      @games = Game.all.page(params[:page]).per(8)
+      @games = Game.all.page(params[:page]).per(12)
     end
 
     @genres = Genre.all

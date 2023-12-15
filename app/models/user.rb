@@ -15,7 +15,7 @@ class User < ApplicationRecord
 	has_many :play_games, dependent: :destroy
 	has_many :usefuls, dependent: :destroy
 	has_many :notifications, dependent: :destroy
-	has_many :reports, foreign_key: "reported_id", as: :reported, dependent: :destroy
+	has_many :reports, foreign_key: "reported_id", as: :content, dependent: :destroy
 
 	has_one_attached :profile_image
 
