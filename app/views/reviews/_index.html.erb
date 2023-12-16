@@ -13,7 +13,7 @@
 				</div>
 				<div class="col-9">
 					<div class="d-flex justify-content-between my-2">
-						<div class="">
+						<div class="mt-3">
 							Nickname : <%= link_to review.user.nickname, user_path(review.user), class: "text-dark" %>
 						</div>
 						<div class="mr-3">
@@ -42,7 +42,7 @@
 
 			<div class="row">
 				<div class="col">
-					<div class="card-body">
+					<div class="card-body border-top mx-2">
 						<div class="card-text">
 							<%= safe_join(review.content.split("\n"),tag(:br)) %>
 						</div>

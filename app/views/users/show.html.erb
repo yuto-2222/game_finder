@@ -8,114 +8,123 @@
 			</div>
 
 			<div class='col-md-9 mt-5'>
-				<div class="my-3">
-					<span class="h2 mr-2">Reviews List</span><span>(<%= @user.reviews.count %>)</span>
-					<% if @reviews.present? %>
-						<table class='table table-hover mt-3'>
-							<thead class="bg-light">
-								<tr>
-									<th></th>
-									<th class="text-nowrap">Game Name</th>
-									<th>Review</th>
-									<th>Useful</th>
-									<th>Comments</th>
-								</tr>
-							</thead>
+				<span class="h2 mr-2">Reviews List</span><span>(<%= @user.reviews.count %>)</span>
+				<% if @reviews.present? %>
+					<% @reviews.each do |review| %>
+						<div class="card my-2">
+							<div class="row g-0">
+								<div class="col-3">
+									<div class="m-2 text-center">
+										<%= link_to game_reviews_path(review.game) do %>
+											<%= image_tag review.game.get_image, class: "obj-img", alt: 'Game Image' %>
+										<% end %>
+									</div>
+								</div>
+								<div class="col-9">
+									<div class="d-flex justify-content-between mt-3 mb-2">
+										<div class="">
+											Game Name : <%= link_to review.game.name, game_reviews_path(review.game), class: 'text-dark' %>
+										</div>
+										<div class="mr-3">
+											<small class="text-secondary"><%= review.created_at.strftime('%m/%d/%Y %H:%M') %></small>
+										</div>
+									</div>
 
-							<tbody>
-								<% @reviews.each do |review| %>
-									<tr>
-										<td class="align-middle">
-											<%= link_to game_reviews_path(review.game) do %>
-												<%= image_tag review.game.get_image, size: "90x100", alt: 'Game Image' %>
-											<% end %>
-										</td>
-										<td class="align-middle">
-											<div class="ml-3">
-												<%= link_to review.game.name, game_reviews_path(review.game), class: 'text-dark' %>
-											</div>
-										</td>
-										<td class="align-middle">
-											<div class="ml-3 table-text">
-												<%= link_to safe_join(review.content.split("\n"),tag(:br)), game_review_path(review.game, review), class: 'text-dark' %>
-											</div>
-										</td>
-										<td class="align-middle">
-											<div class="ml-3">
-												<%= review.usefuls.count %>
-											</div>
-										</td>
-										<td class="align-middle">
-											<div class="ml-3">
-												<%= review.comments.count %>
-											</div>
-										</td>
-									</tr>
-								<% end %>
-							</tbody>
-						</table>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											Useful : <%= review.usefuls.count %>
+										</div>
+										<div class="ml-3">
+											Comments : <%= review.comments.count %>
+										</div>
+									</div>
+								</div>
+							</div>
 
-						<div class="d-flex justify-content-center">
-							<p>
-								<%= paginate @reviews, theme: 'bootstrap-5' %>
-							</p>
+							<div class="row">
+								<div class="col">
+									<div class="card-body border-top mx-2">
+										<div class="card-text">
+											<%= link_to safe_join(review.content.split("\n"),tag(:br)), game_review_path(review.game, review), class: 'text-dark' %>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
+					<% end %>
 
+					<div class="d-flex justify-content-center">
+						<p>
+							<%= paginate @reviews, theme: 'bootstrap-5' %>
+						</p>
+					</div>
+
+				<% else %>
+					<div class="m-3">
+						Nothing
+					</div>
+				<% end %>
+
+
+				<div class="mt-3">
+					<span class="h2 mr-2">Comments List</span><span>(<%= @user.comments.count %>)</span>
+					<% if @comments.present? %>
+						<% @comments.each do |comment| %>
+							<div class="card my-2">
+								<div class="row g-0">
+									<div class="col-3">
+										<div class="m-2">
+											<div class="text-center">
+												<%= link_to game_reviews_path(comment.review.game) do %>
+													<%= image_tag comment.review.game.get_image, class: "obj-img", alt: 'Game Image' %>
+												<% end %>
+											</div>
+
+											<div class="ml-2">
+												Game Name :
+												<div class="text-center">
+													<%= link_to comment.review.game.name, game_reviews_path(comment.review.game), class: 'text-dark' %>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-9">
+										<div class="d-flex justify-content-between my-2">
+											<h6 class="mt-2">Review</h6>
+											<div class="mr-3">
+												<small class="text-secondary"><%= comment.review.created_at.strftime('%m/%d/%Y %H:%M') %></small>
+											</div>
+										</div>
+
+										<div>
+											<%= link_to safe_join(comment.review.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col">
+										<div class="card-body border-top mx-2">
+											<div class="d-flex justify-content-between">
+												<div class="card-text">
+													<%= link_to safe_join(comment.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
+												</div>
+												<div class="">
+													<small class="text-secondary"><%= comment.created_at.strftime('%m/%d/%Y %H:%M') %></small>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						<% end %>
 					<% else %>
 						<div class="m-3">
 							Nothing
 						</div>
 					<% end %>
 				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col">
-				<span class="h2 mr-2">Comments List</span><span>(<%= @user.comments.count %>)</span>
-				<% if @comments.present? %>
-					<table class='table table-hover mt-3'>
-						<thead class="bg-light">
-							<tr>
-								<th></th>
-								<th class="text-nowrap">Game Name</th>
-								<th>Review</th>
-								<th>Comment</th>
-							</tr>
-						</thead>
-
-						<tbody>
-							<% @comments.each do |comment| %>
-								<tr>
-									<td class="align-middle">
-										<%= link_to game_reviews_path(comment.review.game) do %>
-											<%= image_tag comment.review.game.get_image, size: "90x100", alt: 'Game Image' %>
-										<% end %>
-									</td>
-									<td class="align-middle">
-										<div class="ml-3">
-											<%= link_to comment.review.game.name, game_reviews_path(comment.review.game), class: 'text-dark' %>
-										</div>
-									</td>
-									<td class="align-middle">
-										<div class="ml-3 table-text">
-											<%= link_to safe_join(comment.review.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
-										</div>
-									</td>
-									<td class="align-middle">
-										<div class="ml-3 table-text">
-											<%= link_to safe_join(comment.content.split("\n"),tag(:br)), game_review_path(comment.review.game, comment.review), class: 'text-dark' %>
-										</div>
-									</td>
-								</tr>
-							<% end %>
-						</tbody>
-					</table>
-				<% else %>
-					<div class="m-3">
-						Nothing
-					</div>
-				<% end %>
 			</div>
 		</div>
 	<% else %>
